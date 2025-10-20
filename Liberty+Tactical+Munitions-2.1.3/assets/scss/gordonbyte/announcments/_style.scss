@@ -1,0 +1,176 @@
+@import "settings";
+
+
+.announcementBar{
+	position: relative;
+	background-color: $top-bar-background-color;
+	z-index: zIndex('highest');
+
+	&.z-low{
+		z-index: 1;
+	}
+  
+	&.quickSearch-active{
+	  z-index: zIndex('high');
+	}
+  
+	@include grid-row(
+		$behavior: nest
+	);
+	margin: 0;
+  }
+  
+  .announcementBar svg{
+	fill: $top-bar-link-color;
+	margin-right: 5px;
+	margin-top: -3px;
+	vertical-align: middle;
+  }
+  
+  
+  .announcementBar-left{
+	display: none;
+	@include grid-column(12);
+	text-align: center;
+  
+	@include breakpoint("medium") {
+	  display: inline-block;
+	  text-align: left;
+  
+	  &.announcement-enabled{
+		@include grid-column(6);
+	  }
+	  &.announcement-enabled.action-btn-enable{
+		@include grid-column(4);
+	  }
+	  &.action-btn-enable{
+		@include grid-column(8);
+	  }
+	}
+
+	span{
+		display: none;
+
+		@include breakpoint("large") {
+			display: inline-block;
+		}
+	}
+  
+  
+  }
+  .announcementBar-center{
+	@include grid-column(12);
+	text-align: center;
+	
+	@include breakpoint("medium") {
+	  @include grid-column(12);
+  
+	  &.store-number-enable.action-btn-enable, &.store-email-enable.action-btn-enable{
+		text-align: center;
+		@include grid-column(4);
+	  }
+	  &.action-btn-enable{
+		text-align: left;
+		@include grid-column(8);
+	  }
+	  &.store-number-enable:not(.action-btn-enable), &.store-email-enable:not(.action-btn-enable){
+		text-align: right;
+		@include grid-column(6);
+	  }
+	}
+  
+  }
+  
+  .announcementBar-right{
+	display: none;
+  
+	@include breakpoint("medium") {
+	  display: inline-block;
+	  @include grid-column(12);
+  
+	  &.store-number-enable, &.action-btn-enable, &.announcement-enabled{
+		@include grid-column(4);
+	  }
+	}
+  
+  }
+  
+  
+  .announcementBar-left > div{
+	position: relative;
+	display: inline-block;
+	padding: spacing("quarter") (spacing("single") - spacing("quarter"));
+	vertical-align: top;
+  
+	@include breakpoint("medium") {
+	  padding: spacing("half") (spacing("single") - spacing("quarter"));
+	}
+  
+	&:after{
+	  content: "";
+	  position: absolute;
+	  top: 0;
+	  bottom: 0;
+	  right: 0;
+	  margin: auto;
+	  width: 1px;
+	  height: 15px;
+	  background-color: $top-bar-link-color;
+	}
+	&:first-child{
+	  padding-left: 0;
+	}
+	&:last-child:after{
+	  display: none;
+	}
+  }
+  
+  .announcementBar-left a{
+	color: $top-bar-link-color;
+	@include transition(all, $transition-speed-2, ease-in-out);
+  
+	&:hover{
+	  color: $top-bar-link-color-hover;
+	}
+  }
+  
+  .announcementBar-center{
+	color: $top-bar-announcement-text-color;
+	text-align: center;
+	padding: spacing("quarter") 0;
+  
+	@include breakpoint("medium") {
+	  padding: spacing("half") spacing("quarter");
+	}
+  }
+  
+  .announcementBar-right{
+	position: relative;
+	text-align: right;
+	padding: 0 .78571rem;
+  }
+  
+  .announcementBar-right a{
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: $buttonStyle-primary-backgroundColor;
+	color: $buttonStyle-primary-color;
+	font-family: $gb-top-bar-action-btn-font-google;
+	height: 100%;
+	padding: (spacing("single") - spacing("quarter")) (spacing("single") + spacing("quarter")) (spacing("double") - spacing("quarter"));
+	text-align: right;
+	text-decoration: none;
+	@include transition(all, $transition-speed-2, ease-in-out);
+  
+	span{
+	  padding: 0;
+	}
+  
+	&:hover{
+	  background-color: $buttonStyle-primary-backgroundColorHover;
+	  color: $buttonStyle-primary-colorHover;
+	}
+  
+  }
+  

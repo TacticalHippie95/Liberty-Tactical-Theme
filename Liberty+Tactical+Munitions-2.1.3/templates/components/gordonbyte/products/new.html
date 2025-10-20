@@ -1,0 +1,17 @@
+{{#if theme_settings.homepage_new_products_count '>' 0}}
+<div class="new-products product-sections rowcount-{{ columns }}" {{#if theme_settings.gb_default_background }}style="background-image:url({{cdn 'img/bg-img.jpg'}});" {{/if}}>
+  <div class="container">
+    <h2 class="page-heading"><span>{{lang 'products.new' }}</span></h2>
+
+      {{{region name="home_new_products_description"}}}
+
+    <div class="product-carousel-holder clip-arrows lightarrows">
+      {{#if settings.data_tag_enabled}}
+        {{> components/gordonbyte/products/carousel products=products list="New Products" product_type="new" countLimit=theme_settings.homepage_new_products_count }}
+      {{else}}
+        {{> components/gordonbyte/products/carousel products=products product_type="new" countLimit=theme_settings.homepage_new_products_count}}
+      {{/if}}
+    </div>
+  </div>
+</div>
+{{/if}}

@@ -1,0 +1,13 @@
+@import "settings";
+
+
+.navPage-subMenu-item{
+	.navPage-subMenu-action{
+		border: none;
+		margin: 0;
+	}
+}
+
+.navPage-subMenu.is-open{
+	z-index: 1;
+}

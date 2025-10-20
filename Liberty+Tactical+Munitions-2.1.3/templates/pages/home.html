@@ -1,0 +1,100 @@
+---
+products:
+    new:
+        limit: 50
+    featured:
+        limit: 50
+    top_sellers:
+        limit: 50
+carousel: {{theme_settings.homepage_show_carousel}}
+blog:
+    recent_posts:
+        limit: {{theme_settings.gb-blog-count}}
+    posts:
+        limit: 5
+        pages: 5
+        summary: 200
+---
+{{#partial "hero"}}
+    {{{region name="home_below_menu"}}}
+    {{#and carousel carousel.slides.length}}
+        {{> components/gordonbyte/carousel theme_settings=theme_settings arrows=theme_settings.homepage_show_carousel_arrows play_pause_button=theme_settings.homepage_show_carousel_play_pause_button}}
+    {{/and}}
+
+    {{> components/gordonbyte/common/featured-product-slider/featured-product-slider products=products theme_settings=theme_settings}}
+
+    {{{region name="home_below_carousel"}}}
+
+    <!-- Elfsight Age Verification | Untitled Age Verification -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-64455500-f072-4e0b-918a-1813d2ea5b63" data-elfsight-app-lazy></div>
+    
+{{/partial}}
+
+{{#partial "page"}}
+
+    {{#each shipping_messages}}
+        {{> components/common/alert/alert-info message}}
+    {{/each}}
+
+<div id="main-container" class="main full" data-sections="{{ theme_settings.gb-section-order }}">
+
+            <section data-order="1">
+                    {{> components/gordonbyte/common/category-products/category-products theme_settings=theme_settings category=categories }}
+                    {{{region name="home_below_category_products"}}}
+            </section>
+
+            <section data-order="2">
+                    {{> components/gordonbyte/common/featured-product/featured-product theme_settings=theme_settings prod=products }}
+                    {{{region name="home_below_featured_product"}}}
+            </section>
+
+            <section data-order="3">
+                    {{#if products.featured}}
+                        {{> components/gordonbyte/products/featured products=products.featured columns=theme_settings.homepage_featured_products_column_count theme_settings=theme_settings settings=settings}}
+                    {{/if}}
+                    {{{region name="home_below_featured_products"}}}
+            </section>
+
+            <section data-order="7">
+                    {{#if products.top_sellers}}
+                        {{> components/gordonbyte/products/top products=products.top_sellers columns=theme_settings.homepage_top_products_column_count theme_settings=theme_settings settings=settings}}
+                    {{/if}}
+                    {{{region name="home_below_top_products"}}}
+            </section>
+
+            <section data-order="5">
+                    {{> components/gordonbyte/common/featured-info/featured-info theme_settings=theme_settings }}
+                    {{{region name="home_below_featured_info"}}}
+            </section>   
+            
+            <section data-order="6">
+                    {{> components/gordonbyte/common/multi-column/multi-column theme_settings=theme_settings}}
+                    {{{region name="home_below_multi_column"}}}
+            </section>
+
+            <section data-order="4">
+                    {{#if products.new}}
+                        {{> components/gordonbyte/products/new products=products.new columns=theme_settings.homepage_new_products_column_count theme_settings=theme_settings settings=settings}}
+                    {{/if}}
+                    {{{region name="home_below_new_products"}}}
+            </section>
+
+            <section data-order="8">
+                    {{> components/gordonbyte/common/video/video theme_settings=theme_settings}}
+                    {{{region name="home_below_video"}}}
+            </section>
+
+            <section data-order="9">
+                    {{> components/gordonbyte/common/brands/brands theme_settings=theme_settings}}
+                    {{{region name="home_below_brands"}}}
+            </section>
+
+            <section data-order="11">
+                    {{> components/gordonbyte/common/instagram/instagram theme_settings=theme_settings}}
+                    {{{region name="home_below_instagram"}}}
+            </section>
+
+</div>
+{{/partial}}
+{{> layout/base}}

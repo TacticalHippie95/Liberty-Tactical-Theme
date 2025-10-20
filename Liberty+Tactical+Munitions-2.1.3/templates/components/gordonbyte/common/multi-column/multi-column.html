@@ -1,0 +1,69 @@
+{{#if theme_settings.gb-home-guarantees-enable }}
+<div class="multi-column{{#if theme_settings.gb-guarantee-total-count '==' 2 }} gb-two-row{{/if}}{{#if theme_settings.gb-guarantee-total-count '==' 3 }} gb-third-row{{/if}}">
+
+  <div class="multi-columnSliderHolder">
+
+    {{#if theme_settings.gb-guarantee-total-count '>' 0 }}
+    <div class="multi-column-item">
+      <div class="multi-columnHolder">
+
+        {{#if theme_settings.gb-home-guarantees-enable-icon }}
+        <div class="multi-columnIcon">
+          <strong class="{{ theme_settings.gb-home-guarantees-first-icon }}"></strong>
+        </div>
+        {{/if}}
+
+        <div class="multi-columnInfo">
+          <h3 class="multi-columnInfo-top">
+            {{ theme_settings.gb-home-guarantees-first-header }}
+          </h3><!--.multi-columnInfo-top ends-->
+        </div>
+
+        </div>
+    </div>
+    {{/if}}
+
+    {{#if theme_settings.gb-guarantee-total-count '>' 1 }}
+    <div class="multi-column-item">
+      <div class="multi-columnHolder">
+
+        {{#if theme_settings.gb-home-guarantees-enable-icon }}
+        <div class="multi-columnIcon">
+          <strong class="{{ theme_settings.gb-home-guarantees-second-icon }}"></strong>
+        </div>
+        {{/if}}
+
+        <div class="multi-columnInfo">
+          <h3 class="multi-columnInfo-top">
+            {{ theme_settings.gb-home-guarantees-second-header }}
+          </h3><!--.multi-columnInfo-top ends-->
+        </div>
+
+        </div>
+    </div>
+    {{/if}}
+
+    {{#if theme_settings.gb-guarantee-total-count '>' 2 }}
+    <div class="multi-column-item">
+      <div class="multi-columnHolder">
+
+        {{#if theme_settings.gb-home-guarantees-enable-icon }}
+          <div class="multi-columnIcon">
+            <strong class="{{ theme_settings.gb-home-guarantees-third-icon }}"></strong>
+          </div>
+        {{/if}}
+
+        <div class="multi-columnInfo">
+          <h3 class="multi-columnInfo-top">
+            {{ theme_settings.gb-home-guarantees-third-header }}
+          </h3><!--.multi-columnInfo-top ends-->
+        </div>
+
+        </div>
+    </div>
+    {{/if}}
+
+  </div>
+
+</div><!--.guarantees ends-->
+{{/if}}

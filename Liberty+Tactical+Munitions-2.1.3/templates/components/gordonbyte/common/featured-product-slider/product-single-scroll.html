@@ -1,0 +1,61 @@
+<section class="productSlider"
+          data-slick='{
+              "arrows": true,
+              "mobileFirst": true,
+              "autoplay": false,
+              "slidesToShow": 1,
+              "slidesToScroll": 1,
+              "dots": false,
+              "speed":1300,
+              "responsive": [
+              {
+                "breakpoint": 1301,
+                "settings": {
+                  "slidesToShow": 4,
+                  "slidesToScroll": 4
+                }
+              },
+              {
+                "breakpoint": 992,
+                "settings": {
+                  "slidesToShow": 3,
+                  "slidesToScroll": 3
+                }
+              },
+              {
+                "breakpoint": 768,
+                "settings": {
+                  "slidesToShow": 2,
+                  "slidesToScroll": 2
+                }
+              },
+              {
+                "breakpoint": 600,
+                "settings": {
+                  "slidesToShow": 1,
+                  "slidesToScroll": 1
+                }
+              }
+              ],
+              "lazyLoad": "anticipated",
+              "slide": ".product-carouselinfo",
+              "prevArrow": ".product-carousel-prev-arrow",
+              "nextArrow": ".product-carousel-next-arrow"
+          }'>
+
+          <button aria-label="{{lang 'carousel.arrowAriaLabel'}} {{carousel.slides.length}}" class="product-carousel-prev-arrow slick-prev slick-arrow">hero-prev-arrow</button>
+
+          {{#if theme_settings.gb-category-slider-product-type '==' 1}}
+            {{> components/gordonbyte/common/featured-product-slider/product-slider-featured products=products.top_sellers theme_settings=theme_settings}}
+          {{/if}}
+
+          {{#if theme_settings.gb-category-slider-product-type '==' 2}}
+            {{> components/gordonbyte/common/featured-product-slider/product-slider-featured products=products.featured theme_settings=theme_settings}}
+          {{/if}}
+
+          {{#if theme_settings.gb-category-slider-product-type '==' 3}}
+            {{> components/gordonbyte/common/featured-product-slider/product-slider-featured products=products.new theme_settings=theme_settings}}
+          {{/if}}
+
+          <button aria-label="{{lang 'carousel.arrowAriaLabel'}} {{carousel.slides.length}}" class="product-carousel-next-arrow slick-next slick-arrow">hero-next-arrow</button>
+      </section>

@@ -1,0 +1,76 @@
+<div class="heroCarousel-holder">
+<section class="heroCarousel clip-arrows {{#unless ../theme_settings.homepage_stretch_carousel_images}}gbstretch{{/unless}}"
+    data-slick='{
+        "arrows": {{arrows}},
+        "mobileFirst": true,
+        "slidesToShow": 1,
+        "slidesToScroll": 1,
+        "autoplay": true,
+        "autoplaySpeed": {{carousel.swap_frequency}},
+        "slide": "[data-hero-slide]"
+    }'
+    data-mobileimg='{{ theme_settings.gb-mobile-carousel-images }}'
+>
+    {{#each carousel.slides}}
+    {{#if button_text}}
+    <div data-hero-slide="{{@index}}">
+    {{else}}
+    <a href="{{url}}" data-hero-slide="{{@index}}" aria-label="{{#if this.alt_text.length '!=' 0}}{{this.alt_text}}{{else}}{{lang 'carousel.slide_number' slide_number=(add @index 1)}}{{/if}}">
+    {{/if}}
+    <div class="heroCarousel-slide {{#if ../theme_settings.homepage_stretch_carousel_images}}stretch{{/if}} {{#if @first}}heroCarousel-slide--first{{/if}}">
+        <div class="heroCarousel-image-wrapper">
+        {{#if @first}}
+            {{> components/common/responsive-img
+                image=stencil_image
+                class="heroCarousel-image"
+                fallback_size='1280w'
+                lazyload='disabled'
+            }}
+        {{else}}
+            {{> components/common/responsive-img
+                image=stencil_image
+                class="heroCarousel-image"
+                fallback_size='1280w'
+                lazyload='lazyload'
+            }}
+        {{/if}}
+        </div>
+        
+        <div class="heroCarousel-content heroCarouselPos-{{ ../theme_settings.gb-carousel-position }}{{#if ../theme_settings.gb-carousel-bg-transparent }} heroCarouselbg-transparent{{/if}}">
+            {{#if heading}}
+            <div>
+                <p class="heroCarousel-title">{{{heading}}}</p>
+            </div>
+            {{/if}}
+            {{#if text}}
+            <div>
+                <p class="heroCarousel-description">{{{text}}}</p>
+            </div>
+            {{/if}}
+            {{#if button_text}}
+            <div>
+                <div class="button_holder">
+                    <a href="{{url}}" aria-label="{{#if this.alt_text.length '!=' 0}}{{this.alt_text}}{{else}}{{lang 'carousel.slide_number' slide_number=(add @index 1)}}{{/if}}, {{button_text}}" class="heroCarousel-action button button--primary button--large style-action first-herolink"><span>{{button_text}}</span></a>
+                    {{#if ../theme_settings.gb-carousel-second-button-title }}
+                    <a href="{{ ../theme_settings.gb-carousel-second-button-link }}" aria-label="{{#if this.alt_text.length '!=' 0}}{{this.alt_text}}{{else}}{{lang 'carousel.slide_number' slide_number=(add @index 1)}}{{/if}}, {{button_text}}" class="heroCarousel-action button button--primary button--large style-action second-herolink{{#if ../theme_settings.gb-carousel-second-button-inverse }} inverse-btn{{/if}}{{#if ../theme_settings.gb-carousel-second-button-transparent }} transparent-bg{{/if}}"><span>{{ ../theme_settings.gb-carousel-second-button-title }}</span></a>
+                    {{/if}}
+                </div>
+            </div>
+            {{/if}}
+        </div>
+
+    </div>
+    {{#if button_text}}
+    </div>
+    {{else}}
+    </a>
+    {{/if}}
+    {{/each}}
+    {{#if carousel.slides.length '>' 1}}
+        {{> components/carousel-content-announcement}}
+        {{#if play_pause_button}}
+            {{> components/gordonbyte/carousel-play-pause-button}}
+        {{/if}}
+    {{/if}}
+</section>
+</div>

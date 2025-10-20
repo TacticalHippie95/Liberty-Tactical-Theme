@@ -1,0 +1,12 @@
+<div class="heroCarousel-content{{#unless show_background}} heroCarousel-content--empty{{/unless}} heroCarouselPos-{{ theme_settings.gb-carousel-position }}{{#if theme_settings.gb-carousel-bg-transparent }} heroCarouselbg-transparent{{/if}}">
+    <span class="heroCarousel-title">{{{heading}}}</span>
+    <p class="heroCarousel-description">{{{text}}}</p>
+    {{#if button_text}}
+    <div class="button_holder">
+        <a href="{{url}}" aria-label="{{#if this.alt_text.length '!=' 0}}{{this.alt_text}}{{else}}{{lang 'carousel.slide_number' slide_number=(add @index 1)}}{{/if}}, {{button_text}}" class="heroCarousel-action button button--primary button--large style-action first-herolink"><span>{{button_text}}</span></a>
+        {{#if theme_settings.gb-carousel-second-button-title }}
+        <a href="{{ theme_settings.gb-carousel-second-button-link }}" aria-label="{{#if this.alt_text.length '!=' 0}}{{this.alt_text}}{{else}}{{lang 'carousel.slide_number' slide_number=(add @index 1)}}{{/if}}, {{button_text}}" class="heroCarousel-action button button--primary button--large style-action second-herolink{{#if theme_settings.gb-carousel-second-button-inverse }} inverse-btn{{/if}}{{#if theme_settings.gb-carousel-second-button-transparent }} transparent-bg{{/if}}"><span>{{ theme_settings.gb-carousel-second-button-title }}</span></a>
+        {{/if}}
+    </div>
+    {{/if}}
+</div>

@@ -1,0 +1,38 @@
+{{#if theme_settings.gb-blog-count '!=' 0 }}
+<div class="latest-blog product-sections latestblog-{{theme_settings.gb-blog-per-slide}}" {{#if theme_settings.gb_default_background }}style="background-image:url({{cdn 'img/bg-img.jpg'}});" {{/if}}>
+  <div class="container">
+    <h2 class="page-heading"><span>{{ theme_settings.gb-blog-main-title }}</span></h2>
+    
+      {{{region name="home_blog_description"}}}
+
+    <div data-product-slide class="latest-blog-holder clip-arrows lightarrows" data-slick='{
+        "dots": false,
+        "infinite": false,
+        "mobileFirst": true,
+        "slidesToShow": 1,
+        "slidesToScroll": 1,
+        "slide": ".blog-content-holder",
+        "responsive": [
+            {
+                "breakpoint": 1200,
+                "settings": {
+                    "slidesToShow": {{ theme_settings.gb-blog-per-slide }},
+                    "slidesToScroll": {{ theme_settings.gb-blog-per-slide }}
+                }
+            },
+            {
+                "breakpoint": 767,
+                "settings": {
+                    "slidesToShow": 2,
+                    "slidesToScroll": 2
+                }
+            }
+        ]
+    }'>
+
+      {{> components/gordonbyte/common/blog/blog-article blog=blog posts_count=theme_settings.gb-blog-count theme_settings=theme_settings }}
+
+    </div><!--.blog-holder ends-->
+  </div>
+</div>
+{{/if}}

@@ -1,0 +1,42 @@
+<ul class="tabs hidden" data-tab role="tablist">
+    {{#if product.related_products}}
+        <li class="tab is-active" role="presentation">
+            <a class="tab-title" href="#tab-related" role="tab" tabindex="0" aria-selected="true" controls="tab-related">{{lang 'products.related_products'}}</a>
+        </li>
+    {{/if}}
+    {{#if product.similar_by_views}}
+        <li class="tab{{#unless product.related_products}} is-active{{/unless}}" role="presentation">
+            <a class="tab-title" href="#tab-similar" role="tab" tabindex="0" aria-selected="{{#if product.related_products}}false{{else}}true{{/if}}" controls="tab-similar">{{lang 'products.similar_by_views'}}</a>
+        </li>
+    {{/if}}
+</ul>
+
+
+{{{region name="above_related_products"}}}
+
+
+{{#if product.related_products}}
+  <div class="productPage-view clip-arrows lightarrows">
+        <h2 class="page-heading"><span>{{lang 'products.related_products'}}</span></h2>
+
+        {{#if settings.data_tag_enabled}}
+            {{> components/gordonbyte/products/carousel product_type="related" products=product.related_products columns=4 list="Related Products" countLimit=20}}
+        {{else}}
+            {{> components/gordonbyte/products/carousel product_type="related" products=product.related_products columns=4 countLimit=20}}
+        {{/if}}
+  </div><!--.productPage-view ends-->
+{{/if}}
+
+
+{{{region name="above_similar_views"}}}
+
+
+
+{{#if product.similar_by_views}}
+  <div class="productPage-view clip-arrows lightarrows">
+        <h2 class="page-heading"><span>{{lang 'products.similar_by_views'}}</span></h2>
+
+        {{> components/gordonbyte/products/carousel product_type="similar" columns=4 products=product.similar_by_views settings=../settings theme_settings=../theme_settings customer=../customer event="list" list="Customers Also Viewed" productstype="also" countLimit=20 position=(add @index 1)}}
+
+  </div><!--.productPage-view ends-->
+{{/if}}

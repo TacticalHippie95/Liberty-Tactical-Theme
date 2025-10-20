@@ -1,0 +1,579 @@
+@import "settings";
+
+// =============================================================================
+// CARDS (CSS)
+// =============================================================================
+//
+// 1. Allow users to click the anchor tag on the image in the figcaption empty
+//    space. This provides a much larger and simpler hit state for navigating
+//    to the product details page. (Does not work in IE10 or earlier).
+// 2. Using translate3d to counter a chrome specific bug: When using a masonry
+//    styled layout via CSS column-count etc, transforms applied to descendants
+//    are made invisible, except for 3d transforms...
+//
+// -----------------------------------------------------------------------------
+
+
+$value_of_swatch_size: stencilString("swatch_option_size");
+$position_of_x: str-index($value_of_swatch_size, "x");
+$first_value: str-slice($value_of_swatch_size, 0, $position_of_x - 1);
+$second_value: str-slice($value_of_swatch_size, $position_of_x + 1);
+
+
+.card {
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+
+    &:focus-within {
+        .card-figcaption {
+            opacity: 1;
+        }
+    }
+
+    &.focus-within {
+        .card-figcaption {
+            opacity: 1;
+        }
+    }
+    &:hover{
+      box-shadow: 0 0 8px rgba(204, 204, 204, .4);
+    }
+    &:hover .card-body{
+      border: 1px solid $card-border-color;
+    }
+}
+
+.card-figure {
+    border: 1px solid $card-border-color;
+    margin-top: $card-figure-marginTop;
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+
+    &:hover {
+
+        // scss-lint:disable NestingDepth
+        .card-figcaption {
+            opacity: 1;
+        }
+    }
+
+    &__link {
+        display: block;
+        position: relative;
+    }
+}
+
+.card-img-container {
+    max-width: get-width(stencilString('productgallery_size'));
+
+	@include lazy-loaded-padding('productgallery_size');
+	
+	&:after{
+		padding-bottom: 100%;
+	}
+
+
+}
+
+.card-figcaption {
+    display: none;
+    margin: $card-figcaption-margin;
+    pointer-events: none; // 1
+
+    .card-figcaption-body > *{
+      margin: 0;
+      height: 35px;
+      width: 100%;
+      cursor: pointer;
+
+      &:active {
+          background-color: $card-figcaption-button-backgroundHover;
+          border: $card-figcaption-button-border;
+          fill: $card-figcaption-button-colorHover;
+      }
+
+      &:hover{
+        fill: $card-figcaption-button-colorHover;
+        background-color: $card-figcaption-button-backgroundHover;
+      }
+    }
+
+    @include breakpoint("medium") {
+        display: block;
+    }
+}
+
+.card-figcaption-body > *{
+  &.compare-active, &:active {
+      background-color: $card-figcaption-button-backgroundHover;
+      border: $card-figcaption-button-border;
+      fill: $card-figcaption-button-colorHover;
+  }
+
+  &.compare-active, &:hover, &:focus{
+    fill: $card-figcaption-button-colorHover;
+    background-color: $card-figcaption-button-backgroundHover;
+  }
+}
+
+
+.card-figcaption.compare-active{
+  opacity: 1;
+}
+
+.card-figcaption-body {
+    display: $card-figcaption-body-display;
+    pointer-events: all; // 1
+    //transform: translate3d(0, -50%, 0); // 2
+    position: absolute;
+    margin: 0;
+	top: auto;
+	left: 0;
+    bottom: 0;
+    transform: none;
+    width: 100%;
+}
+
+.quickviewlabel-btn{
+  display: none;
+}
+
+.card-image {
+    @include lazy-loaded-img;
+    border: 0;
+    width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    /* Object-fit polyfill */
+}
+
+.card-title {
+    font-family: $header-font-family;
+    font-weight: $header-font-weight;
+    margin: $card-title-margin;
+    font-size: var(--fs-normal);
+    height: calc(var(--fs-normal) * 3);
+    overflow: hidden;
+
+    // @include breakpoint("medium") {
+    //   font-size: $card-title-fontSize;
+    // }
+
+    > a {
+        color: $card-title-color;
+        text-decoration: $card-title-textDecoration;
+        display: block;
+
+        // scss-lint:disable NestingDepth
+        &:hover {
+            color: $card-title-color-hover;
+        }
+    }
+}
+
+.card-text {
+    margin-bottom: $card-text-marginBottom;
+
+    abbr {
+        border: 0;
+        color: inherit;
+        font-size: inherit;
+    }
+}
+
+.card-figcaption-button {
+    border: $card-figcaption-button-border;
+    border-radius: 0;
+    display: $card-figcaption-button-display;
+    //margin: $card-figcaption-button-margin;
+    padding: spacing("half") spacing("half");
+    text-transform: uppercase;
+    font-family: $header-font-family;
+    font-weight: $header-font-weight;
+    font-size: .8rem;
+    margin: 0 0 1rem;
+
+    @include breakpoint("xsmall") {
+        font-size: 1rem;
+    }
+
+    &:active {
+        background-color: $card-figcaption-button-backgroundHover;
+        border: $card-figcaption-button-border;
+    }
+
+    &:hover{
+      color: $card-figcaption-button-colorHover;
+      background-color: $card-figcaption-button-backgroundHover;
+    }
+
+    .card-figcaption-body &{
+        &:focus {
+            background-color: $card-figcaption-button-backgroundHover;
+            outline: revert;
+        }
+    }
+
+    + .card-figcaption-button {
+        //margin: $card-figcaption-button-margin;
+    }
+}
+
+.card-body {
+    color: $card-title-color;
+    text-align: left;
+    background-color: $card-background-color;
+    border: 1px solid $card-border-color;
+    border-top: none !important;
+    padding: spacing("half") spacing("half");
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    min-height: unset !important;
+
+    @include breakpoint("small") {
+      padding: spacing("half") spacing("single");
+    }
+
+    // @include breakpoint("medium") {
+    //   min-height: (spacing("double") * 6);
+    // }
+
+    p.card-text{
+      @include breakpoint("medium") {
+        height: spacing("single");
+      }
+
+      .card-review-total{
+        display: none;
+
+        @include breakpoint("xsmall") {
+          display: inline-block;
+        }
+      }
+    }
+
+    div.card-text{
+      @include breakpoint("medium") {
+        height: (spacing("single") * 2);
+      }
+    }
+
+    p.card-brandname{
+      color: $card-title-color;
+      font-size: .8rem;
+      text-transform: uppercase;
+      height: 1.2rem;
+    }
+}
+
+.price-section{
+  font-family: $header-font-family;
+  font-weight: $header-font-weight;
+  color: $card-price-color;
+  font-size: .9rem;
+
+  @include breakpoint("xsmall") {
+      font-size: 1rem;
+  }
+
+  @include breakpoint("small") {
+      font-size: 1.3rem;
+  }
+
+}
+
+.rrp-price--withoutTax, .non-sale-price--withoutTax, .rrp-price--withTax, .non-sale-price--withTax{
+  color: $card-sale-price-color;
+  font-size: .8rem;
+}
+
+.card-review-total{
+  color: $card-title-color;
+  margin-left: spacing("quarter");
+  font-size: .8rem;
+  vertical-align: text-top;
+}
+
+
+//
+// Alternate card
+//
+// Purpose: Used to give the card alternative styling
+// -----------------------------------------------------------------------------
+
+.card--alternate {
+    border: 3px solid stencilColor("card--alternate-borderColor");
+    transition: all 0.15s ease;
+
+    .card-body {
+        background-color: stencilColor("card--alternate-backgroundColor");
+        padding: spacing("half");
+        transition: all 0.15s ease;
+
+        @include breakpoint("small") {
+            padding: spacing("single");
+        }
+    }
+
+    &:hover {
+        border-color: stencilColor("color-primary");
+
+        // scss-lint:disable SelectorDepth, NestingDepth
+        .card-body {
+            background-color: stencilColor("color-primary");
+
+            .card-text {
+                color: stencilColor("card--alternate-color--hover");
+            }
+        }
+
+        .card-title > a {
+            color: stencilColor("card--alternate-color--hover");
+        }
+    }
+}
+
+.addtocart-btn{
+  width: 100%;
+}
+
+.card{
+  #swatchGroup{
+    display: none;
+  }
+
+  .form-field{
+    margin: 0 0 spacing("half");
+
+    .form-option-wrapper{
+      display: none;
+    }
+
+    .form-option-wrapper:nth-child(-n+5){
+        display: inline-block;
+    }
+  }
+
+  .form-option-swatch{
+    margin-right: 1px;
+
+    @include breakpoint("xsmall") {
+      margin-right: 3px;
+    }
+
+    .style-parallel &{
+      transform: skew(-20deg, 0);
+    }
+  }
+
+  .form-option{
+    border:1px solid #ccc !important;
+  }
+
+  .form-option:hover{
+    cursor: default !important;
+  }
+
+  .swatch-total {
+    font-size: .7rem;
+    margin-left: 0;
+    display: inline-block;
+    vertical-align: text-top;
+    margin-left: 5px;
+
+    @include breakpoint("small") {
+        font-size: .8rem;
+    }
+
+  }
+
+  .form-option-variant--color,
+  .form-option-variant--pattern {
+      padding: 0;
+      height: 13px;
+      width: 13px;
+
+      @include breakpoint("xsmall") {
+        height: $second_value +"px";
+        width: $first_value +"px";
+      }
+  }
+}
+
+.brand{
+  .card .card-body{
+    min-height: auto;
+  }
+}
+
+
+
+.style-parallel{
+      .form-option-wrapper .form-option-swatch.gb-swatch-pattern {
+         transform: skew(-30deg, 0);
+      }
+}
+
+.style-oval{
+    .form-option-variant--pattern {
+        height: 20px;
+        width: 20px;
+
+        @include breakpoint("xsmall") {
+          height: $second_value +"px";
+          width: $first_value +"px";
+        }
+    }
+}
+
+.card{
+  .form-option-wrapper .form-option-variant--pattern{
+    background-size: cover;
+  }
+}
+
+
+.product-carousel-holder{
+	.card, .productGrid{
+	  margin-bottom: 0;
+	}
+  }
+  
+  .productGrid{
+	.product{
+	  @include grid-column(6);
+  
+	  .card-body{
+		min-height: 13.5rem;
+	  }
+  
+	  @include breakpoint("small") {
+		@include grid-column(4);
+  
+		// .card-body{
+		//   min-height: 18rem;
+		// }
+	  }
+  
+	  @include breakpoint("medium") {
+		@include grid-column(3);
+	  }
+  
+	}
+  }
+  
+  .rowcount-6{
+	.productGrid{
+	  .product{
+		@include breakpoint("large") {
+		  @include grid-column(2);
+		}
+	  }
+	}
+	.productGrid, .productCarousel{
+	  .product{
+		padding: 0 5px;
+  
+		@include breakpoint("large") {
+		  .card-review-total{
+			display: none;
+		  }
+		}
+  
+		// .card-body{
+		//   min-height: 13.5rem;
+		// }
+  
+		.card-title{
+		  font-size: .9rem;
+		}
+  
+		.card-swatch .form-option-variant{
+		  height: 12px;
+		  width: 12px;
+		}
+  
+		.form-option-swatch{
+		  margin-right: 1px;
+		}
+  
+		.price-section{
+		  font-size: 1rem;
+		}
+  
+		.rrp-price--withoutTax, .non-sale-price--withoutTax, .rrp-price--withTax, .non-sale-price--withTax{
+		  font-size: .8rem;
+		}
+	  }
+	}
+  }
+  
+  
+  .rowcount-5{
+	.productGrid{
+	  .product{
+		float: left;
+		@include breakpoint("large") {
+		  width: 20%;
+		}
+	  }
+	}
+	.productGrid, .productCarousel{
+	  .product{
+  
+		padding: 0 5px;
+  
+		.card-body{
+		  min-height: 14rem;
+		}
+  
+		.card-title{
+		  font-size: .9rem;
+		}
+  
+		.card-swatch .form-option-variant{
+		  height: 12px;
+		  width: 12px;
+		}
+  
+		.form-option-swatch{
+		  margin-right: 1px;
+		}
+  
+		.price-section{
+		  font-size: 1rem;
+		}
+  
+		.rrp-price--withoutTax, .non-sale-price--withoutTax, .rrp-price--withTax, .non-sale-price--withTax{
+		  font-size: .8rem;
+		}
+	  }
+	}
+  }
+  
+  .rowcount-4{
+	.productGrid{
+	  .product{
+		@include breakpoint("large") {
+		  @include grid-column(3);
+		}
+	  }
+	}
+  }
+  
+  .rowcount-3{
+	.productGrid{
+	  .product{
+		@include breakpoint("medium") {
+		  @include grid-column(4);
+		}
+  
+		@include breakpoint("large") {
+		  @include grid-column(4);
+		}
+	  }
+	}
+  }

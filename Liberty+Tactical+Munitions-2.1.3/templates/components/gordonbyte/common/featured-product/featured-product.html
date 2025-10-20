@@ -1,0 +1,66 @@
+{{#if theme_settings.gb-highlight-product-img-position '==' 'left' }}
+  {{assignVar 'animation_direction' 'right'}}
+{{else}}
+  {{assignVar 'animation_direction' 'left'}}
+{{/if}}
+
+{{#or (if theme_settings.gb-highlight-product-section-name '!=' '') (if theme_settings.gb-theme-demo '==' true)}}
+  <div class="highlight-product{{#if theme_settings.gb-highlight-product-img-position }} {{theme_settings.gb-highlight-product-img-position }}-highlight{{/if}}{{#if theme_settings.gb-theme-demo }} demo{{/if}}" {{#if theme_settings.gb-theme-demo }}data-highlightid="{{ prod.new.0.id }}"{{else}} data-highlightid="{{ theme_settings.gb-highlight-product-section-name }}" {{/if}}>
+    <div class="container">
+      <div class="flex-align">
+        <div class="highight-img">
+          <img src="" alt="">
+        </div>
+
+        <div class="highlight-info">
+
+          {{#if theme_settings.gb-highlight-product-banner-text }}
+          <div class="skeleton skeleton-text-large skeleton-short">
+            <div>
+              <div>
+                <span class="highlight-banner style-action skeleton-prefilled">
+                  <span>{{ theme_settings.gb-highlight-product-banner-text }}</span>
+                </span>
+              </div>
+            </div>
+          </div>
+          {{/if}}
+
+          <div>
+            <div>
+              <h2 class="skeleton skeleton-text-large skeleton-large"></h2>
+            </div>
+          </div>
+          <div class="skeleton skeleton-text-large skeleton-large remove-skeleton"></div>
+          <div class="skeleton skeleton-text-large skeleton-large remove-skeleton"></div>
+
+          <div>
+            <div>
+              <div class="highlight-price skeleton skeleton-text-large skeleton-short"></div>
+            </div>
+          </div>
+
+          <div class="skeleton skeleton-text-large skeleton-short remove-skeleton"></div>
+
+          <div>
+            <div>
+              <div class="highight-atc skeleton skeleton-text-large skeleton-short skeleton-prefilled">
+                <a href="#" class="button btn button--primary style-action"><span>{{ theme_settings.gb-highlight-buy-btn }}</span></a>
+              </div>
+            </div>
+          </div>
+
+          {{#if theme_settings.gb-highlight-product-enable-social-share }}
+          <div>
+            <div>
+              <div class="highlight-social skeleton skeleton-text-large skeleton-short"></div>
+            </div>
+          </div>
+          {{/if}}
+
+        </div>
+
+      </div>
+    </div>
+  </div><!--.highlight-product ends-->
+{{/or}}

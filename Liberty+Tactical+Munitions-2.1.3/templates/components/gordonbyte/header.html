@@ -1,0 +1,119 @@
+<a href="#main-content" class="skip-to-main-link">{{lang 'header.skip_to_main'}}</a>
+{{#if banners.top}}
+<div class="banners" data-banner-location="top">
+    {{#each (limit banners.top_metadata 1)}}
+    <div class="banner" data-event-type="promotion" data-entity-id="{{this.id}}" data-name="{{this.banner-name}}" data-position="{{this.location}}" data-banner-id="{{this.banner-name}}">
+        <div data-event-type="promotion-click">
+            {{{this.content}}}
+        </div>
+    </div>
+    {{/each}}
+</div>
+{{/if}}
+
+{{{region name="home_above_announcments"}}}
+{{{region name="home_above_announcments--global"}}}
+
+{{> components/gordonbyte/common/announcments/announcments }}
+
+
+<header id="header" class="header{{#if theme_settings.gb-enable-gradient-bg }} gradient-bg{{/if}}{{#if theme_settings.gb-header-sticky }} headerSticky{{/if}}" role="banner"  data-apitok="{{settings.storefront_api.token}}">
+
+    <div class="container">
+
+      <div class="mobile-header">
+        <div class="headerLeft-mobile">
+          <a href="#" class="mobileMenu-toggle" data-mobile-menu-toggle="menu">
+              <span class="mobileMenu-toggleIcon">Toggle menu</span>
+          </a>
+        </div>
+
+        <div class="headerCenter-mobile">
+          {{#if page_type '===' 'default'}}
+              <h1 class="header-logo">
+                  {{> components/common/store-logo}}
+              </h1>
+          {{else}}
+              <div class="header-logo">
+                  {{> components/common/store-logo}}
+              </div>
+          {{/if}}
+        </div>
+
+        <div class="headerRight-mobile">
+          <a class="navUser-action"
+             data-cart-preview
+             data-dropdown="cart-preview-dropdown"
+             data-options="align:right"
+             href="{{urls.cart}}"
+             aria-label="{{lang 'cart.nav_aria_label'}}"
+          >
+              {{> components/gordonbyte/common/cart-icon}}
+              <span class="headerTitle navUser-item-cartLabel">{{lang 'common.cart'}}</span>
+              <span class="countPill cart-quantity"></span>
+          </a>
+        </div>
+      </div><!--.mobile-header ends-->
+
+
+      <div class="headerLeft{{#if theme_settings.logo-position '==' 'left'}} logo-active{{/if}}">
+
+        {{#if theme_settings.logo-position '==' 'left'}}
+
+          {{#if page_type '===' 'default'}}
+              <h1 class="header-logo">
+                  {{> components/common/store-logo}}
+              </h1>
+          {{else}}
+              <div class="header-logo">
+                  {{> components/common/store-logo}}
+              </div>
+          {{/if}}
+
+        {{else}}
+
+          {{> components/gordonbyte/common/main-nav }}
+
+        {{/if}}
+
+      </div><!--.headerLeft ends-->
+
+
+      <div class="headerCenter{{#if theme_settings.logo-position '==' 'center'}} logo-active{{/if}}">
+        {{#if theme_settings.logo-position '==' 'center'}}
+
+          {{#if page_type '===' 'default'}}
+              <h1 class="header-logo">
+                  {{> components/common/store-logo}}
+              </h1>
+          {{else}}
+              <div class="header-logo">
+                  {{> components/common/store-logo}}
+              </div>
+          {{/if}}
+
+        {{else}}
+
+          {{> components/gordonbyte/common/main-nav }}
+
+        {{/if}}
+      </div><!--.headerCenter ends-->
+
+
+      <div class="headerRight{{#if theme_settings.logo-position '==' 'left'}} logo-active{{/if}}">
+        {{> components/gordonbyte/common/navigation}}
+      </div><!--.headerRight ends-->
+
+
+
+    </div>
+
+    <div class="navPages-container " id="menu" data-menu>
+        {{> components/gordonbyte/common/navigation-menu}}
+    </div>
+    {{{region name="header_navigation_bottom--global"}}}
+</header>
+
+
+{{{region name="header_bottom--global"}}}
+{{{region name="header_bottom"}}}

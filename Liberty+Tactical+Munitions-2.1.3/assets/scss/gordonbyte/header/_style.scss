@@ -1,0 +1,509 @@
+@import "settings";
+
+.header {
+    position: relative;
+    top: 0;
+    width: 100%;
+    z-index: zIndex("higher");
+    height: $header-height;
+    background-color: $header-bg;
+    border-bottom: none;
+
+    &.gradient-bg{
+      background: $header-second-gradient-color;
+      background: -moz-linear-gradient(90deg,  $header-second-gradient-color 0%,  $header-first-gradient-color 50%,  $header-second-gradient-color 100%);
+      background: -webkit-linear-gradient(90deg,  $header-second-gradient-color 0%, $header-first-gradient-color 50%,  $header-second-gradient-color 100%);
+      background: linear-gradient(90deg, $header-second-gradient-color 0%, $header-first-gradient-color 50%,  $header-second-gradient-color 100%);
+    }
+
+
+
+    @include breakpoint("medium") {
+        overflow: visible;
+        position: relative;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &.is-open {
+        //height: 100%;
+        height: 90vh;
+
+        @include breakpoint("medium") {
+            height: auto;
+        }
+
+        .navPages-list--user{
+          padding-bottom: (spacing("double") * 3);
+        }
+    }
+}
+
+.header-logo {
+    font-size: 0;   // 1
+    margin: 0; // 2
+    text-align: center;
+    height: $header-height;
+
+    @include breakpoint("small") { // 4
+        margin-left: remCalc($header-toggle-width * 1.5);
+        margin-right: remCalc($header-toggle-width * 1.5);
+    }
+
+    @include breakpoint("medium") {
+        margin: spacing("single") auto;
+        padding: 0;
+        height: auto;
+
+        .header.fixed & {
+            background-color: color("greys", "lightest");
+            margin: 0;
+            padding: spacing("quarter") 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+    }
+
+    &__link {
+        @include clearfix;
+        color: $storeName-color;
+        height: inherit;
+        display: flex;
+        justify-content: center; // 6
+        align-items: center;
+        margin: 0 auto;
+        position: relative;
+        text-decoration: none;
+        width: 70%;
+        z-index: zIndex("low");
+
+        // scss-lint:disable NestingDepth
+        @include breakpoint("medium") {
+            background: none;
+            border-bottom: 0;
+            display: inline-flex;
+            padding: 0;
+            width: auto;
+        }
+
+        &:hover {
+            color: color("link", "hover");
+        }
+
+        &:active {
+            color: color("link", "active");
+        }
+    }
+}
+
+.header-logo--left {
+    text-align: left;
+
+    @include breakpoint("medium") {
+        margin-left: remCalc(40px);
+    }
+
+    .header-logo-image {
+        right: unset;
+    }
+}
+
+.header-logo--right {
+    text-align: right;
+
+    @include breakpoint("medium") {
+        margin-right: remCalc(40px);
+    }
+
+    .header-logo-image {
+        left: unset;
+    }
+}
+
+.header-logo-text {
+    display: block;
+    font-family: $fontFamily-hero;
+    font-size: $fontSize-logo-small;   // 1
+    font-weight: 800;
+    letter-spacing: remCalc(2px);
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    @include breakpoint("small") {
+        font-size: $fontSize-logo-medium;
+    }
+
+    @include breakpoint("medium") {
+        display: inline;
+        font-size: $fontSize-logo-large;
+        max-width: none;
+        overflow: auto;
+        white-space: normal;
+        padding: 0 10px;
+
+        .header.fixed & {
+            font-size: fontSize("larger");
+        }
+    }
+}
+
+.header-logo-image-container {
+    position: relative;
+    width: 100%;
+    min-height: 0;
+
+    // @include breakpoint("medium") {
+    //     min-height: get-height(stencilString('logo_size'));
+    // }
+}
+
+.header-logo-image-container:after {
+    content: '';
+    display: block;
+}
+
+.header-logo-image {
+    max-height: remCalc($header-height) - $header-logo-marginVertical * 2;
+    display: block;
+    margin: 0 auto;
+    width: auto;
+
+    @include breakpoint("medium") {
+        max-height: 65px;
+    }
+}
+
+.header-logo-image-unknown-size { // 5
+    max-height: remCalc($header-height) - $header-logo-marginVertical * 2;
+
+    @include breakpoint("medium") {
+        max-height: none;
+    }
+}
+
+//
+// Mobile Menu Toggle
+//
+// 1. Animate lines from 'x' to hamburger
+// -----------------------------------------------------------------------------
+
+.mobileMenu-toggle {
+    //@include square($header-toggle-width);
+    display: inline-block;
+    font-size: 0;
+    left: 0;
+    overflow: hidden;
+    padding: 0 remCalc(18) 0 0;
+    //position: absolute;
+    z-index: zIndex("high");
+
+    @include breakpoint("medium") {
+        display: none;
+    }
+
+    .mobileMenu-toggleIcon,
+    .mobileMenu-toggleIcon::before,
+    .mobileMenu-toggleIcon::after {
+        background: $mobile-icon-color;
+        content: "";
+        display: block;
+        height: 2px;
+        position: absolute;
+        transform: rotate(0deg);
+        transition: transform 100ms ease-in, top 100ms ease-in 150ms, bottom 100ms ease-in 150ms; // 1
+        width: remCalc(20);
+    }
+
+    .mobileMenu-toggleIcon {
+        top: remCalc(27);
+        transition: background-color 10ms ease-in 100ms;
+    }
+
+    .mobileMenu-toggleIcon::before {
+        top: -0.5rem;
+    }
+
+    .mobileMenu-toggleIcon::after {
+        bottom: -0.5rem;
+    }
+
+    &.is-open .mobileMenu-toggleIcon {
+        background-color: transparent;
+        transition-delay: 100ms;
+
+        // scss-lint:disable NestingDepth
+        &::before,
+        &::after {
+            background-color: $mobile-icon-color;
+            bottom: auto;
+            top: auto;
+            transition: transform 100ms ease-in 150ms, top 100ms ease-in, bottom 100ms ease-in; // Animate lines from hamburger to 'x'
+        }
+
+        &::before {
+            top: 0;
+            transform: rotate(45deg);
+        }
+
+        &::after {
+            bottom: 0;
+            transform: rotate(-45deg);
+        }
+
+    }
+}
+
+
+.headerLeft{
+	@include grid-column(4);
+	display: none;
+  
+	@include breakpoint("medium") {
+	  display: block;
+	}
+  
+	&.logo-active{
+	  @include grid-column(3);
+	}
+  
+	.header-logo{
+	  text-align: left;
+	}
+  }
+  
+  .headerCenter{
+	@include grid-column(6);
+	display: none;
+  
+	@include breakpoint("medium") {
+	  display: block;
+	}
+  
+	&.logo-active{
+	  @include grid-column(4);
+	}
+  }
+  
+  .main-nav{
+    ul{
+      float: left;
+      margin: 0;
+      padding: spacing("single") 0;
+      width: 100%;
+    
+      li{
+        a.navPages-action{
+          color: $main-content-nav-color;
+          background-color: transparent;
+      
+          &:hover, &.activePage{
+          color: $main-content-nav-color-hover;
+          background-color: $main-content-nav-background-color;
+          }
+        }
+      }
+    }
+  }
+  
+  
+  .headerRight{
+	@include grid-column(4);
+	display: none;
+  
+	@include breakpoint("medium") {
+	  display: block;
+	  padding: (spacing("single") + spacing("quarter")) 0 0;
+	}
+  
+	&.logo-active{
+	  @include grid-column(3);
+	}
+  
+	.navUser{
+    padding: 0;
+
+	  .navUser-action{
+      padding: 0.78571rem 5px;
+  
+	  }
+	} 
+  
+  
+	.navUser-item{
+	  position: relative;
+	  text-align: center;
+  
+	  a:hover{
+		.headerTitle{
+		  opacity: 1;
+		}
+	  }
+	}
+  
+  
+	.headerTitle{
+	  @include transition(all, $transition-speed-4, ease-in-out);
+	  display: none;
+	  font-size: .6rem;
+	  opacity: 0;
+  
+	  @include breakpoint("medium") {
+		  display: block;
+	  }
+	}
+  
+	.navUser-item--currency{
+	  .navUser-action--currencySelector{
+		font-size: 1rem;
+  
+		@include breakpoint("large") {
+		  font-size: 1.2rem;
+		}
+	  }
+  
+	  .dropdown-menu{
+		min-width: 200px;
+		left: auto !important;
+		top: 50px !important;
+		right: 0;
+		border: 1px solid stencilColor("navUser-dropdown-borderColor");
+		z-index: zIndex("high");
+	  }
+	}
+  
+  }
+  
+  
+.mobile-header{
+	display: flex;
+	padding: 0;
+  
+  
+	@include breakpoint("medium") {
+	  display: none;
+	}
+  
+	.headerLeft-mobile{
+    position: relative;
+    width: 20%;
+	  z-index: zIndex("high");
+	}
+	.headerCenter-mobile{
+    width: 60%;
+	}
+	.headerRight-mobile{
+    width: 20%;
+	  text-align: right;
+	  position: relative;
+	  z-index: zIndex("high");
+  
+	  .navUser-action{
+		position: relative;
+		padding: spacing("single") 0 0 spacing("half");
+  
+		svg{
+		  fill: $mobile-icon-color;
+		}
+  
+		.countPill{
+		  color: $mobile-icon-color;
+		  top: 4px;
+		  right: -5px;
+		}
+    }
+    
+    .navUser-item-cartLabel{
+      display: none;
+
+      @include breakpoint("medium") {
+        display: block;
+      }
+    }
+	}
+  }
+
+
+
+  .countPill {
+    position: absolute;
+    top: -7px;
+    right: 0;
+    //background-color: stencilColor("navUser-indicator-backgroundColor");
+    border-radius: 50%;
+    color: $navUser-icon-color;
+    display: none;
+    font-size: fontSize("tiny");
+    font-weight: fontWeight("bold");
+    height: 20px; // 1
+    line-height: 20px; // 1
+    margin-left: spacing("eighth");
+    text-align: center;
+    width: 20px; // 1
+}
+
+.countPill--positive {
+    display: inline-block;
+}
+
+.countPill--alt {
+    //background-color: color("greys", "lighter");
+    //color: color("greys", "darker");
+}
+
+
+.closeSearch{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.closeSearch-btn{
+  position: relative;
+  // color: $quicksearch-searchbar-icon;
+
+  span{
+    vertical-align: middle;
+  }
+
+  &:after{
+    display: inline-block;
+    content: "\00d7";
+    font-size: 3rem;
+    font-weight: 100;
+    margin: 0 10px;
+    vertical-align: middle;
+  }
+}
+
+.quickSearchResults{
+  .modal-close{
+    display: none !important;
+  }
+}
+
+.navUser-item--cart .dropdown-menu{
+  min-width: 22.85714rem;
+}
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.headerSticky.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+.headerSticky.stickyPad {
+  //padding-top: 127.94px;
+}
+
+
+.navUser-item--cart__hidden-s{
+  display: block !important;
+}

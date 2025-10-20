@@ -1,0 +1,16 @@
+
+<div class="main-nav{{#if theme_settings.gb-menu-hide }} novisib{{/if}}">
+  <ul>
+    {{#each pages}}
+         <li class="navPages-item navPages-item-page">
+             <a class="navPages-action{{#if name '==' ../page.title}} activePage{{/if}} style-action"
+                href="{{url}}"
+                aria-label="{{name}}"
+             >
+                 <span>{{name}}</span>
+             </a>
+
+         </li>
+     {{/each}}
+   </ul>
+</div><!--.main-nav ends-->

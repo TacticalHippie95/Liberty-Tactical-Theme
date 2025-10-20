@@ -1,0 +1,11 @@
+{{#if theme_settings.gb-enable-category-slider }}
+  <div class="HomepageProductSlider{{#if theme_settings.gb-enable-overlay }} hps-overlay{{/if}}{{#if theme_settings.gb-enable-category-slider-mobile-hide }} noMobile{{/if}}{{#if theme_settings.gb-enable-category-slider-infinite }} infiniteScroll{{/if}}">
+    <div class="HomepageProductSlider-holder">
+      {{#if theme_settings.gb-enable-category-slider-infinite }}
+        {{> components/gordonbyte/common/featured-product-slider/product-infinite-scroll products=products theme_settings=theme_settings}}
+      {{else}}
+        {{> components/gordonbyte/common/featured-product-slider/product-single-scroll products=products theme_settings=theme_settings}}
+      {{/if}}
+    </div>  
+  </div><!--.HomepageProductSlider ends-->
+{{/if}}

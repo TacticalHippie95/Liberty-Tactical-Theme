@@ -1,0 +1,236 @@
+{{#any (if theme_settings.gb-category-product-section-one-name) (if theme_settings.gb-category-product-section-two-name) (if theme_settings.gb-category-product-section-three-name) (if theme_settings.gb-category-product-section-four-name) }}
+<div class="categoryProducts product-sections" {{#if theme_settings.gb_default_background }}style="background-image:url({{cdn 'img/bg-img.jpg'}});" {{/if}}>
+  <div class="container">
+    <h2 class="page-heading"><span>{{ theme_settings.gb-category-product-section-main-heading }}</span></h2>
+
+      <div>{{{region name="home_our_product_description"}}}</div>
+
+    <div class="category-selections" data-gbperrow="{{ theme_settings.gb-category-product-section-per-row }}" data-gbloadin="{{ theme_settings.gb-category-product-section-load-in }}">
+      <ul>
+        {{#if theme_settings.gb-category-product-section-one-name }}
+        <li class="active-cat" data-gbtype="{{ theme_settings.gb-category-product-section-one-type }}" data-gbcatid="{{ theme_settings.gb-category-product-section-one-name }}">
+          <a href="#">
+
+            {{#if theme_settings.gb-category-product-section-enable-imgs }}
+            <div class="caticon">
+              {{#if theme_settings.gb-category-product-section-one-img }}
+                <img src="{{getImageManagerImage theme_settings.gb-category-product-section-one-img }}"
+                      data-sizes="auto"
+                      alt="{{ theme_settings.gb-category-product-section-one-img }}"
+                      {{#unless lazyload '==' 'disabled'}}
+                          {{#if lazyload '==' 'lazyload+lqip'}}
+                          {{!-- If we want a LQIP, include it as the default srcset (will be overwritten by lazysizes) --}}
+                          srcset="{{getImageManagerImageSrcset theme_settings.gb-category-product-section-one-img }}"
+                          {{else}}
+                            {{!-- If we don't want a LQIP, use a 1px transparent gif for the stand-in image
+                                  This requires no additional network request, so it's fast --}}
+                          srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          {{/if}}
+                      {{/unless}}
+
+                      {{#unless lazyload '==' 'disabled'}}data-{{/unless}}srcset="{{getImageManagerImageSrcset theme_settings.gb-category-product-section-one-img use_default_sizes=true }}"
+
+                      class="{{#unless lazyload '==' 'disabled'}}lazyload{{/unless}}"
+                      {{#if lazyload '==' 'lazyload'}}loading="lazy"{{/if}}
+                      >
+              {{else}}
+                {{#if theme_settings.gb-theme-demo }}
+                  {{> components/gordonbyte/demo/common/img path=theme_settings.gb-theme-name file_name='1category-products.png' }}
+                {{/if}}
+              {{/if}}
+            </div>
+            {{/if}}
+
+            {{ theme_settings.gb-category-product-section-one-title }}
+          </a>
+        </li>
+        {{/if}}
+
+        {{#if theme_settings.gb-category-product-section-two-name }}
+        <li data-gbtype="{{ theme_settings.gb-category-product-section-two-type }}" data-gbcatid="{{ theme_settings.gb-category-product-section-two-name }}">
+          <a href="#">
+
+            {{#if theme_settings.gb-category-product-section-enable-imgs }}
+            <div class="caticon">
+              {{#if theme_settings.gb-category-product-section-two-img }}
+                <img src="{{getImageManagerImage theme_settings.gb-category-product-section-two-img }}"
+                      data-sizes="auto"
+                      alt="{{ theme_settings.gb-category-product-section-two-img }}"
+                      {{#unless lazyload '==' 'disabled'}}
+                          {{#if lazyload '==' 'lazyload+lqip'}}
+                          {{!-- If we want a LQIP, include it as the default srcset (will be overwritten by lazysizes) --}}
+                          srcset="{{getImageManagerImageSrcset theme_settings.gb-category-product-section-two-img }}"
+                          {{else}}
+                            {{!-- If we don't want a LQIP, use a 1px transparent gif for the stand-in image
+                                  This requires no additional network request, so it's fast --}}
+                          srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          {{/if}}
+                      {{/unless}}
+
+                      {{#unless lazyload '==' 'disabled'}}data-{{/unless}}srcset="{{getImageManagerImageSrcset theme_settings.gb-category-product-section-two-img use_default_sizes=true }}"
+
+                      class="{{#unless lazyload '==' 'disabled'}}lazyload{{/unless}}"
+                      {{#if lazyload '==' 'lazyload'}}loading="lazy"{{/if}}
+                      >
+              {{else}}
+                {{#if theme_settings.gb-theme-demo }}
+                  {{> components/gordonbyte/demo/common/img path=theme_settings.gb-theme-name file_name='2category-products.png' }}
+                {{/if}}
+              {{/if}}
+            </div>
+            {{/if}}
+
+            {{ theme_settings.gb-category-product-section-two-title }}
+          </a>
+        </li>
+        {{/if}}
+
+        {{#if theme_settings.gb-category-product-section-three-name }}
+        <li data-gbtype="{{ theme_settings.gb-category-product-section-three-type }}" data-gbcatid="{{ theme_settings.gb-category-product-section-three-name }}">
+          <a href="#">
+            {{#if theme_settings.gb-category-product-section-enable-imgs }}
+            <div class="caticon">
+              {{#if theme_settings.gb-category-product-section-three-img }}
+                <img src="{{getImageManagerImage theme_settings.gb-category-product-section-three-img }}"
+                      data-sizes="auto"
+                      alt="{{ theme_settings.gb-category-product-section-three-img }}"
+                      {{#unless lazyload '==' 'disabled'}}
+                          {{#if lazyload '==' 'lazyload+lqip'}}
+                          {{!-- If we want a LQIP, include it as the default srcset (will be overwritten by lazysizes) --}}
+                          srcset="{{getImageManagerImageSrcset theme_settings.gb-category-product-section-three-img }}"
+                          {{else}}
+                            {{!-- If we don't want a LQIP, use a 1px transparent gif for the stand-in image
+                                  This requires no additional network request, so it's fast --}}
+                          srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          {{/if}}
+                      {{/unless}}
+
+                      {{#unless lazyload '==' 'disabled'}}data-{{/unless}}srcset="{{getImageManagerImageSrcset theme_settings.gb-category-product-section-three-img use_default_sizes=true }}"
+
+                      class="{{#unless lazyload '==' 'disabled'}}lazyload{{/unless}}"
+                      {{#if lazyload '==' 'lazyload'}}loading="lazy"{{/if}}
+                      >
+              {{else}}
+                {{#if theme_settings.gb-theme-demo }}
+                  {{> components/gordonbyte/demo/common/img path=theme_settings.gb-theme-name file_name='3category-products.png' }}
+                {{/if}}
+              {{/if}}
+            </div>
+            {{/if}}
+
+            {{ theme_settings.gb-category-product-section-three-title }}
+          </a>
+        </li>
+        {{/if}}
+
+        {{#if theme_settings.gb-category-product-section-four-name }}
+        <li data-gbtype="{{ theme_settings.gb-category-product-section-four-type }}" data-gbcatid="{{ theme_settings.gb-category-product-section-four-name }}">
+          <a href="#">
+
+            {{#if theme_settings.gb-category-product-section-enable-imgs }}
+            <div class="caticon">
+              {{#if theme_settings.gb-category-product-section-four-img }}
+                <img src="{{getImageManagerImage theme_settings.gb-category-product-section-four-img }}"
+                      data-sizes="auto"
+                      alt="{{ theme_settings.gb-category-product-section-four-img }}"
+                      {{#unless lazyload '==' 'disabled'}}
+                          {{#if lazyload '==' 'lazyload+lqip'}}
+                          {{!-- If we want a LQIP, include it as the default srcset (will be overwritten by lazysizes) --}}
+                          srcset="{{getImageManagerImageSrcset theme_settings.gb-category-product-section-four-img }}"
+                          {{else}}
+                            {{!-- If we don't want a LQIP, use a 1px transparent gif for the stand-in image
+                                  This requires no additional network request, so it's fast --}}
+                          srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                          {{/if}}
+                      {{/unless}}
+
+                      {{#unless lazyload '==' 'disabled'}}data-{{/unless}}srcset="{{getImageManagerImageSrcset theme_settings.gb-category-product-section-four-img use_default_sizes=true }}"
+
+                      class="{{#unless lazyload '==' 'disabled'}}lazyload{{/unless}}"
+                      {{#if lazyload '==' 'lazyload'}}loading="lazy"{{/if}}
+                      >
+              {{else}}
+                {{#if theme_settings.gb-theme-demo }}
+                  {{> components/gordonbyte/demo/common/img path=theme_settings.gb-theme-name file_name='4category-products.png' }}
+                {{/if}}
+              {{/if}}
+            </div>
+            {{/if}}
+
+            {{ theme_settings.gb-category-product-section-four-title }}
+          </a>
+        </li>
+        {{/if}}
+      </ul>
+    </div><!--.category-selections ends-->
+
+
+    <div class="product-carousel-holder clip-arrows lightarrows{{#if theme_settings.gb-category-product-section-row-style '==' 'grid'}} gb-grid{{/if}} rowcount-{{ theme_settings.gb-category-product-section-per-row }}">
+      <div class="loading-spinner">
+        <img src="{{cdn 'img/spinner.gif'}}" alt="">
+      </div><!--.loading-spinner ends-->
+        <section class="productCarousel"></section>
+    </div><!--.product-carousel-holder end-->
+
+  </div>
+</div>
+{{/any}}
+
+
+
+{{#all (if theme_settings.gb-category-product-section-one-name '==' '') (if theme_settings.gb-category-product-section-two-name '==' '') (if theme_settings.gb-category-product-section-three-name '==' '') (if theme_settings.gb-category-product-section-four-name '==' '') }}
+<div class="categoryProducts product-sections demo" {{#if theme_settings.gb_default_background }}style="background-image:url({{cdn 'img/bg-img.jpg'}});" {{/if}}>
+  <div class="container">
+    <h2 class="page-heading"><span>{{ theme_settings.gb-category-product-section-main-heading }}</span></h2>
+
+      <div>{{{region name="home_our_product_description"}}}</div>
+
+    <div class="category-selections" data-gbperrow="{{ theme_settings.gb-category-product-section-per-row }}" data-gbloadin="{{ theme_settings.gb-category-product-section-load-in }}">
+      <ul>
+
+        {{#if category.0.name }}
+        <li class="active-cat" data-gbtype="{{ theme_settings.gb-category-product-section-one-type }}" data-gbcatid="{{ category.0.id }}">
+          <a href="#">
+           {{ category.0.name }}
+          </a>
+        </li>
+        {{/if}}
+        
+
+        {{#if category.1.name }}
+        <li data-gbtype="{{ theme_settings.gb-category-product-section-one-type }}" data-gbcatid="{{ category.1.id }}">
+          <a href="#">
+            {{ category.1.name }}
+          </a>
+        </li>
+        {{/if}}
+        
+        {{#if category.2.name }}
+        <li data-gbtype="{{ theme_settings.gb-category-product-section-one-type }}" data-gbcatid="{{ category.2.id }}">
+          <a href="#">
+            {{ category.2.name }}
+          </a>
+        </li>
+        {{/if}}
+        
+        {{#if category.3.name }}
+        <li data-gbtype="{{ theme_settings.gb-category-product-section-one-type }}" data-gbcatid="{{ category.3.id }}">
+          <a href="#">
+            {{ category.3.name }}
+          </a>
+        </li>
+        {{/if}}
+      </ul>
+    </div><!--.category-selections ends-->
+
+
+    <div class="product-carousel-holder clip-arrows lightarrows{{#if theme_settings.gb-category-product-section-row-style '==' 'grid'}} gb-grid{{/if}} rowcount-{{ theme_settings.gb-category-product-section-per-row }}">
+      <div class="loading-spinner">
+        <img src="{{cdn 'img/spinner.gif'}}" alt="">
+      </div><!--.loading-spinner ends-->
+        <section class="productCarousel" data-catsliderid="{{ category.0.id }}"></section>
+    </div><!--.product-carousel-holder end-->
+
+  </div>
+</div>
+{{/all}}

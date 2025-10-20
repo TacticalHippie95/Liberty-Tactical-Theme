@@ -1,0 +1,19 @@
+$header-bg:                                      stencilColor("header-backgroundColor");
+$header-height:                                  55px;
+$header-toggle-width:                            $header-height;
+$header-logo-marginVertical:                     spacing("half");
+$header-logo-paddingVertical:                    $header-logo-marginVertical;
+
+$header-first-gradient-color:                    stencilColor("gb-header-first-gradient-color");
+$header-second-gradient-color:                   stencilColor("gb-header-second-gradient-color");
+
+$main-content-nav-color:                         stencilColor("gb-main-content-nav-color");
+$main-content-nav-color-hover:                   stencilColor("gb-main-content-nav-color-hover");
+$main-content-nav-background-color:              stencilColor("gb-main-content-nav-background-color");
+
+$header-first-gradient-color:                    stencilColor("gb-header-first-gradient-color");
+$header-second-gradient-color:                   stencilColor("gb-header-second-gradient-color");
+
+$mobile-icon-color:                              stencilColor("gb-mobile-icon-color");
+
+$navUser-icon-color:                  	 		 stencilColor("navUser-icon-color");

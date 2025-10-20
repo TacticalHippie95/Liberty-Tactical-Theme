@@ -1,0 +1,474 @@
+@import "settings";
+
+.heroCarousel{
+    width: 1px;
+    min-width: 100%;
+    margin-bottom: 0;
+
+
+    &.slick-initialized {
+        @include breakpoint("small") {
+            max-height: remCalc(400px);
+        }
+
+        @include breakpoint("medium") {
+            max-height: remCalc(700px);
+        }
+    }
+
+    &:not(.slick-initialized) :not(.heroCarousel-slide--first).heroCarousel-slide {
+        display: none;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .slick-next,
+    .slick-prev {
+        color: $slick-arrow-color;
+        background-color: $slick-arrow-bgColor;
+        border: none;
+        height: (spacing("double") - spacing("quarter"));
+        padding: spacing("half") spacing("half") spacing("half");
+        top: 40%;
+        transform: translateY(-50%);
+        margin: 0;
+        width: (spacing("double") + spacing("single"));
+        -webkit-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+        display: none;
+
+        @include breakpoint("medium") {
+            display: block;
+        }
+
+
+        &::before{
+          font-family: 'Font Awesome 6 Free';
+          background: none;
+          -webkit-transition: all 0.2s ease-in-out;
+          -moz-transition: all 0.2s ease-in-out;
+          transition: all 0.2s ease-in-out;
+        }
+
+        &:hover{
+        width: (spacing("double") + spacing("double"));
+        }
+
+    }
+
+    .slick-next {
+        right: 0;
+
+        .style-parallel &{
+          clip-path: polygon(calc(1px + 20px) 0%, 100% 0%, 100% 100%, 0% 100%);
+          -webkit-clip-path: polygon(calc(1px + 20px) 0%, 100% 0%, 100% 100%, 0% 100%);
+        }
+
+        &::before{
+          content: "\f30b";
+          margin: -2px 3px 0 auto;
+        }
+
+        &:hover{
+          &::before{
+            margin: -2px 10px 0 auto;
+          }
+        }
+    }
+
+    .slick-prev {
+        left: 0;
+
+        .style-parallel &{
+          clip-path: polygon(0% 0%, calc(100% - 20px) 0%, 100% 100%, 0% 100%);
+          -webkit-clip-path: polygon(0% 0%, calc(100% - 20px) 0%, 100% 100%, 0% 100%);
+        }
+
+        &::before{
+          content: "\f30a";
+          margin: -2px 3px 0;
+        }
+
+        &:hover{
+          &::before{
+            margin: -2px 10px 0;
+          }
+        }
+    }
+    .slick-dots {
+        display: none !important;
+        bottom: spacing("third");
+
+        @include breakpoint("medium") {
+            bottom: spacing("single");
+        }
+
+    }
+
+    .slick-slide {
+        &.is-square-image-type {
+            .heroCarousel-image-wrapper {
+                height: 100vw;
+            }
+        }
+
+        &.is-vertical-image-type {
+            .heroCarousel-image-wrapper {
+                height: 110vw;
+            }
+        }
+
+        &.is-square-image-type,
+        &.is-vertical-image-type {
+            .heroCarousel-image-wrapper {
+                @include breakpoint("small") {
+                    height: 56.25vw;
+                }
+            }
+        }
+
+        &.is-image-error {
+            background: url("../img/hero-carousel-image-load-error.svg") center center no-repeat;
+            background-size: contain;
+        }
+    }
+}
+
+.heroCarousel-slide {
+    position: relative;
+
+    .heroCarousel-content{
+      a{
+        border-width: 1px;
+        border-style: solid;
+        border-color: $buttonStyle-primary-backgroundColor;
+      }
+    }
+
+    a {
+        position: relative;
+        font-family: $header-font-family;
+        font-weight: $header-font-weight;
+        border-radius: 0;
+        border: none;
+        padding: spacing("half") spacing("double");
+
+        &:last-child{
+          margin-left: -3px;
+        }
+
+        &:last-child:hover{
+          background-color: $buttonStyle-primary-backgroundColorHover;
+          border-color: $buttonStyle-primary-backgroundColorHover;
+        }
+
+        &.inverse-btn:last-child{
+          background-color: $buttonStyle-primary-backgroundColorHover;
+          border-color: $buttonStyle-primary-backgroundColorHover;
+          color: $buttonStyle-primary-colorHover;
+
+          &.transparent-bg{
+            background-color: transparent;
+          }
+
+          &:hover{
+            background-color: $buttonStyle-primary-backgroundColor;
+            // border-color: $buttonStyle-primary-backgroundColor;
+            color: $buttonStyle-primary-color;
+          }
+        }
+
+        &.transparent-bg{
+          background-color: transparent;
+        }
+    }
+
+    .heroCarousel-image {
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
+        object-position: 50% 0%;
+
+        @include breakpoint("small") {
+            object-position: 50% 50%;
+        }
+    }
+
+    &.stretch {
+        .heroCarousel-image {
+            object-fit: cover;
+            object-position: 50% 50%;
+        }
+
+        &.compat-object-fit { // 1
+            .heroCarousel-image {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+    &.compat-object-fit { // 1
+        overflow: hidden;
+
+        .heroCarousel-image {
+            width: auto;
+        }
+    }
+
+    .heroCarousel-image-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        height: 65vh;
+        min-height: 400px;
+        max-height: 100vh;
+        transition: height .3s ease;
+        padding: 0;
+
+        @include breakpoint("xsmall") {
+          min-height: 500px;
+        }
+
+        @include breakpoint("small") {
+            height: 65vw;
+            min-height: 0;
+            max-height: remCalc(400px);
+        }
+
+        @include breakpoint("medium") {
+            max-height: remCalc(700px);
+        }
+    }
+}
+
+.heroCarousel{
+
+  .slick-list{
+    width: 100%;
+  }
+  .content-filled{
+    .heroCarousel-image-wrapper{
+      height: auto;
+      min-height: 0;
+      max-height: none;
+    }
+
+    &.slick-slide {
+      height: 0px!important;
+    }
+    &.slick-slide.slick-active {
+      height: 100% !important;
+    }
+  }
+}
+
+.heroCarousel .heroCarousel-content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 20%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 spacing("single");
+
+    @include breakpoint("xsmall") {
+      top: 25%;
+    }
+
+    @include breakpoint("small") {
+        //@include carouselOpaqueBackgrounds;
+        width: remCalc(700px);
+        width: 100%;
+        max-width: 700px;
+        top: 30%;
+        transform: translateY(-50%);
+        max-height: 80%;
+        overflow: auto;
+
+        &.heroCarouselPos-left{
+          left: 10%;
+          right: auto;
+          text-align: left;
+        }
+
+        &.heroCarouselPos-right{
+          right: 10%;
+          left: auto;
+          text-align: right;
+
+          .button_holder{
+            justify-content: end;
+          }
+        }
+
+        &.heroCarousel-content--empty {
+            background-color: transparent;
+        }
+    }
+}
+
+
+.heroCarousel-title {
+    color: $carousel-title-color;
+    font-size: 2rem;
+    font-family: $header-font-family;
+    font-weight: $header-font-weight;
+    margin-top: 0;
+    width: 100%;
+    font-size: var(--fs-large);
+
+    // @include breakpoint("medium") {
+    //     font-size: fontSize("hero");
+    // }
+}
+
+.heroCarousel-description {
+
+    color: $carousel-description-color;
+    font-size: .9rem;
+    width: 100%;
+
+    @include breakpoint("xsmall") {
+      font-size: 1rem;
+    }
+
+    @include breakpoint("small") {
+      font-size: 1.1rem;
+      font-weight: $body-font-weight;
+      text-align: left;
+    }
+}
+
+.heroCarousel-action {
+  margin-top: spacing("quarter");
+  margin-bottom: spacing("quarter");
+
+
+    @include breakpoint("medium") {
+        margin-top: spacing("single");
+        margin-bottom: spacing("single");
+    }
+}
+
+.button_holder{
+  display: flex;
+  width: 100%;
+}
+
+.heroCarousel-btn-two{
+  background-color: transparent;
+  border: 1px solid #fff;
+}
+
+.slick-dotted.slick-slider{
+  margin-bottom: 0;
+}
+
+.carousel-play-pause-button{
+  background-color: transparent;
+  border: none;
+
+  &:hover{
+    opacity: .7;
+  }
+
+  svg{
+    fill: $slick-play-pause-button-color;
+    height: 20px;
+  }
+
+  .carousel-play-btn{
+    display: none;
+  }
+
+  &.btn-play .carousel-play-btn{
+    display: block;
+  }
+
+  .carousel-pause-btn{
+    display: block;
+  }
+
+  &.btn-play .carousel-pause-btn{
+    display: none;
+  }
+}
+
+
+.heroCarousel{
+  .slick-next, .slick-prev{
+    display: none !important;
+
+    // &:before{
+    //   color: $color-primary;
+    // }
+
+      @include breakpoint("small") {
+        display: block !important;
+      }
+  }
+}
+
+
+.heroCarousel .heroCarousel-content{
+  background-color: $carousel-bgColor;
+  border-radius: $carousel-border-radius;
+  box-shadow: 0 0 10px $carousel-bgColor;
+  text-align: left;
+  left: 0;
+  transform: none !important;
+  width: 100%;
+
+  @include breakpoint("small") {
+    width: 80%;
+  }
+
+  .heroCarousel-description{
+    margin: 10px 0;
+
+    @include breakpoint("small") {
+      margin-top: 0;
+    }
+  }
+
+}
+
+.heroCarousel .slick-next, .heroCarousel .slick-prev{
+  background-color: $gb-heroCarousel-bgColor;
+  backdrop-filter: blur(10px);
+}
+
+.heroCarouselbg-transparent{
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.productCarousel{
+  margin: 0;
+
+  .productCarousel-slide{
+    padding: 0 2px;
+
+    @include breakpoint("medium") {
+      padding: 0 5px;
+    }
+
+    @include breakpoint("large") {
+      padding: 0 spacing("half");
+    }
+
+  }
+}
+
+
+.heroCarousel.gbstretch{
+  margin-top: 0;
+}
+
+.heroCarousel-slide:not(.stretch) .heroCarousel-image{
+  object-position: 0 0;
+}

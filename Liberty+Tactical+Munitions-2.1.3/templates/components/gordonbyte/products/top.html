@@ -1,0 +1,19 @@
+{{#if theme_settings.homepage_top_products_count '>' 0}}
+<div class="top-products product-sections rowcount-{{ columns }}" {{#if theme_settings.gb_default_background }}style="background-image:url({{cdn 'img/bg-img.jpg'}});" {{/if}}>
+  <div class="container">
+    <h2 class="page-heading"><span>{{lang 'products.top' }}</span></h2>
+
+      {{{region name="home_top_products_description"}}}
+
+    <div class="product-carousel-holder">
+      <ul class="productGrid productGrid--maxCol{{ columns }}" data-product-type="top_sellers"  {{#if settings.data_tag_enabled}} data-list-name="Most Popular" {{/if}}>
+      {{#each (limit products theme_settings.homepage_top_products_count)}}
+        <li class="product">
+          {{>components/gordonbyte/products/card settings=../settings show_rating=../settings.show_product_rating theme_settings=../theme_settings customer=../customer event="list" product_type="top_sellers" position=(add @index 1)}}
+        </li>
+      {{/each}}
+      </ul>
+    </div>
+  </div>
+</div>
+{{/if}}

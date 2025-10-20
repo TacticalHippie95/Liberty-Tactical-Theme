@@ -1,0 +1,22 @@
+{{inject 'carouselPlayPauseButtonPlay' (lang 'carousel.play_pause_button_play')}}
+{{inject 'carouselPlayPauseButtonPause' (lang 'carousel.play_pause_button_pause')}}
+{{inject 'carouselPlayPauseButtonAriaPlay' (lang 'carousel.play_pause_button_aria_play')}}
+{{inject 'carouselPlayPauseButtonAriaPause' (lang 'carousel.play_pause_button_aria_pause')}}
+
+<button
+    data-play-pause-button
+    type="button"
+    class="carousel-play-pause-button{{#if theme_settings.gb-enable-category-slider }}{{#if theme_settings.gb-enable-overlay }} hps-overlay{{/if}}{{/if}}"
+    aria-label="{{lang 'carousel.play_pause_button_aria_pause'}}"
+>
+    {{!-- lang 'carousel.play_pause_button_pause' --}}
+
+    <svg class="carousel-play-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 290 335">
+      <polygon points="0 0 0 335 290 167.5 0 0"/>
+    </svg>
+
+    <svg class="carousel-pause-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 32">
+        <rect class="cls-1" width="8" height="32"/>
+        <rect class="cls-1" x="16" width="8" height="32"/>
+    </svg>
+</button>

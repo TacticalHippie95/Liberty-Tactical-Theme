@@ -1,0 +1,19 @@
+{{#if theme_settings.homepage_featured_products_count '>' 0}}
+<div class="featured-product product-sections rowcount-{{ columns }}" {{#if theme_settings.gb_default_background }}style="background-image:url({{cdn 'img/bg-img.jpg'}});" {{/if}}>
+  <div class="container">
+    <h2 class="page-heading"><span>{{lang 'products.featured' }}</span></h2>
+
+      <div>{{{region name="home_featured_products_description"}}}</div>
+
+    <div class="product-carousel-holder">
+      <ul class="productGrid productGrid--maxCol{{ columns }}" data-product-type="featured" {{#if settings.data_tag_enabled}} data-list-name="Featured Products" {{/if}}>
+        {{#each (limit products theme_settings.homepage_featured_products_count) }}
+            <li class="product">
+                    {{>components/gordonbyte/products/card settings=../settings theme_settings=../theme_settings show_rating=../settings.show_product_rating customer=../customer event="list" product_type="featured" position=(add @index 1)}}
+            </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</div>
+{{/if}}
