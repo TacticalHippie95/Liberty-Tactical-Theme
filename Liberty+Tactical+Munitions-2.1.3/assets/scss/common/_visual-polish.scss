@@ -1,0 +1,532 @@
+// =============================================================================
+// VISUAL POLISH ENHANCEMENTS
+// =============================================================================
+//
+// Purpose: Improve visual aesthetics with refined styling, animations,
+// shadows, and micro-interactions for a more polished user experience
+//
+// Contents:
+// 1. Depth & Shadows
+// 2. Smooth Animations & Transitions
+// 3. Enhanced Hover States
+// 4. Typography Refinements
+// 5. Visual Hierarchy
+// 6. Micro-interactions
+// 7. Loading States
+// 8. Border Radius Consistency
+//
+// -----------------------------------------------------------------------------
+
+// 1. Depth & Shadows
+// -----------------------------------------------------------------------------
+// Modern, subtle shadows that add depth without being overwhelming
+
+// Enhanced card shadow with elevation on hover
+.card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+
+    &:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12),
+                    0 4px 8px rgba(0, 0, 0, 0.08);
+        transform: translateY(-2px);
+    }
+}
+
+// Product card figure with subtle border
+.card-figure {
+    border-radius: 8px 8px 0 0;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+
+    &:hover {
+        border-color: rgba(0, 0, 0, 0.12);
+    }
+}
+
+// Card body with rounded bottom
+.card-body {
+    border-radius: 0 0 8px 8px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-top: none;
+}
+
+// Hero carousel with subtle shadow
+.heroCarousel {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+// Featured sections with gentle elevation
+.HomepageProductSlider-holder {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+// 2. Smooth Animations & Transitions
+// -----------------------------------------------------------------------------
+// Consistent, performant animations for better UX
+
+// Smooth card transitions
+.card {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Button animations with easing
+.button,
+button {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    &:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+    }
+}
+
+// Smooth image transitions
+.card-image {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s ease;
+
+    .card:hover & {
+        transform: scale(1.05);
+    }
+}
+
+// Link hover animations
+a {
+    transition: color 0.2s ease,
+                opacity 0.2s ease;
+
+    &:hover {
+        opacity: 0.85;
+    }
+}
+
+// Carousel slide transitions
+.heroCarousel-slide {
+    transition: opacity 0.5s ease-in-out;
+}
+
+// Product slider smooth scrolling
+.productSlider {
+    .slick-track {
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+}
+
+// 3. Enhanced Hover States
+// -----------------------------------------------------------------------------
+// Refined hover effects for better interactivity
+
+// Card figcaption with smooth reveal
+.card-figcaption {
+    opacity: 0;
+    transition: opacity 0.3s ease,
+                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(10px);
+
+    .card:hover &,
+    .card:focus-within & {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Card figcaption buttons with refined hover
+.card-figcaption-button {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 6px;
+
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    svg {
+        transition: transform 0.2s ease;
+    }
+
+    &:hover svg {
+        transform: scale(1.1);
+    }
+}
+
+// Carousel arrow hover effects
+.slick-arrow {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 4px;
+
+    &:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    &::before {
+        transition: transform 0.2s ease;
+    }
+
+    &:hover::before {
+        transform: scale(1.2);
+    }
+}
+
+// Add to cart button enhancement
+.addtocart-btn {
+    a, button {
+        border-radius: 6px;
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        &:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+    }
+}
+
+// 4. Typography Refinements
+// -----------------------------------------------------------------------------
+// Improved text rendering and hierarchy
+
+// Smooth text rendering
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+// Product title with better spacing
+.card-title {
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+
+    a {
+        text-decoration: none;
+        background-image: linear-gradient(currentColor, currentColor);
+        background-position: 0% 100%;
+        background-repeat: no-repeat;
+        background-size: 0% 1px;
+        transition: background-size 0.3s;
+
+        &:hover {
+            background-size: 100% 1px;
+        }
+    }
+}
+
+// Carousel title with better readability
+.heroCarousel-title {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: -0.02em;
+}
+
+// Carousel description with subtle shadow
+.heroCarousel-description {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+// Price with emphasis
+.price {
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+// 5. Visual Hierarchy
+// -----------------------------------------------------------------------------
+// Clear visual structure and importance
+
+// Section spacing for better separation
+section[data-order] {
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 5%;
+        right: 5%;
+        height: 1px;
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(0, 0, 0, 0.08) 50%,
+            transparent 100%
+        );
+    }
+
+    &:last-child::after {
+        display: none;
+    }
+}
+
+// Product badges with better visibility
+.badge {
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+// Featured info blocks with depth
+.featured-info-block {
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+        transform: translateY(-4px);
+    }
+}
+
+// 6. Micro-interactions
+// -----------------------------------------------------------------------------
+// Small delightful interactions for better UX
+
+// Quick view button pulse on hover
+.quickview {
+    &:hover {
+        animation: pulse 1.5s infinite;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(74, 144, 226, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(74, 144, 226, 0);
+    }
+}
+
+// Compare button check animation
+.compareprod-btn {
+    input:checked + & {
+        animation: checkBounce 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+}
+
+@keyframes checkBounce {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+// Image load fade-in
+.card-image {
+    &.lazyloaded {
+        animation: fadeIn 0.5s ease-in;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+// Carousel auto-play indicator
+.carousel-play-pause-button {
+    transition: all 0.3s ease;
+    border-radius: 50%;
+
+    &:hover {
+        transform: scale(1.1) rotate(90deg);
+    }
+}
+
+// Mobile menu toggle animation enhancement
+.mobileMenu-toggleIcon {
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+// 7. Loading States
+// -----------------------------------------------------------------------------
+// Visual feedback during content loading
+
+// Skeleton loading for images
+.card-img-container {
+    position: relative;
+    background: linear-gradient(
+        90deg,
+        #f0f0f0 25%,
+        #e0e0e0 50%,
+        #f0f0f0 75%
+    );
+    background-size: 200% 100%;
+
+    &:not(:has(img.lazyloaded)) {
+        animation: shimmer 2s infinite;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+// Smooth image reveal
+.card-image {
+    &:not(.lazyloaded) {
+        opacity: 0;
+    }
+
+    &.lazyloading {
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    &.lazyloaded {
+        opacity: 1;
+    }
+}
+
+// 8. Border Radius Consistency
+// -----------------------------------------------------------------------------
+// Unified border radius for cohesive design
+
+// Global border radius variables (use existing or set defaults)
+$border-radius-sm: 4px;
+$border-radius-md: 6px;
+$border-radius-lg: 8px;
+$border-radius-xl: 12px;
+
+// Apply consistent border radius
+.button,
+button {
+    border-radius: $border-radius-md;
+}
+
+.card {
+    border-radius: $border-radius-lg;
+}
+
+.badge {
+    border-radius: $border-radius-sm;
+}
+
+.heroCarousel {
+    border-radius: $border-radius-lg;
+
+    @media (max-width: 800px) {
+        border-radius: 0; // Full width on mobile
+    }
+}
+
+input,
+select,
+textarea {
+    border-radius: $border-radius-sm;
+}
+
+// Featured sections
+.HomepageProductSlider,
+.featured-info,
+.multi-column {
+    border-radius: $border-radius-lg;
+}
+
+// Modal and overlays
+.modal,
+.dropdown-menu {
+    border-radius: $border-radius-lg;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+// 9. Enhanced Visual Effects
+// -----------------------------------------------------------------------------
+
+// Gradient overlays for images
+.card-figure__link::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        transparent 60%,
+        rgba(0, 0, 0, 0.03) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.card:hover .card-figure__link::after {
+    opacity: 1;
+}
+
+// Better separator lines
+hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(0, 0, 0, 0.1) 50%,
+        transparent 100%
+    );
+    margin: 2rem 0;
+}
+
+// Smooth scrollbar
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+
+    &:hover {
+        background: #a1a1a1;
+    }
+}
+
+// Selection color
+::selection {
+    background-color: rgba(74, 144, 226, 0.3);
+    color: inherit;
+}
+
+::-moz-selection {
+    background-color: rgba(74, 144, 226, 0.3);
+    color: inherit;
+}
