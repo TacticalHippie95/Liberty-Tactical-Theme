@@ -1,0 +1,350 @@
+// =============================================================================
+// MOBILE RESPONSIVENESS ENHANCEMENTS
+// =============================================================================
+//
+// Purpose: Improve mobile user experience with better touch targets,
+// spacing, typography, and responsive behavior
+//
+// -----------------------------------------------------------------------------
+
+// Touch Target Improvements (WCAG 2.1 Level AA - 44x44px minimum)
+// -----------------------------------------------------------------------------
+
+// Increase mobile menu toggle touch target
+.mobileMenu-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    // Improve tap area on mobile
+    @media (max-width: 800px) {
+        margin-right: 8px;
+    }
+}
+
+// Ensure card action buttons meet touch target standards
+.card-figcaption-button {
+    @media (max-width: 800px) {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 12px;
+
+        // Increase spacing between buttons
+        &:not(:last-child) {
+            margin-right: 8px;
+        }
+    }
+}
+
+// Improve product quick view and compare button touch targets
+.quickview,
+.compareprod-btn {
+    @media (max-width: 800px) {
+        min-height: 48px;
+        min-width: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+// Mobile Navigation Enhancements
+// -----------------------------------------------------------------------------
+
+.navPages-container {
+    @media (max-width: 800px) {
+        // Smooth scrolling for long menus
+        -webkit-overflow-scrolling: touch;
+
+        // Better touch feedback
+        a, button {
+            min-height: 44px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+        }
+    }
+}
+
+// Mobile Typography & Spacing
+// -----------------------------------------------------------------------------
+
+// Improve readability on mobile
+.heroCarousel-title {
+    @media (max-width: 550px) {
+        font-size: 1.5rem;
+        line-height: 1.3;
+        margin-bottom: 8px;
+    }
+}
+
+.heroCarousel-description {
+    @media (max-width: 550px) {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        margin-bottom: 12px;
+    }
+}
+
+// Improve mobile spacing for homepage sections
+#main-container section {
+    @media (max-width: 550px) {
+        padding: 16px 0;
+
+        &[data-order] {
+            margin-bottom: 24px;
+        }
+    }
+}
+
+// Card spacing on mobile
+.card {
+    @media (max-width: 550px) {
+        margin-bottom: 20px;
+    }
+}
+
+.card-body {
+    @media (max-width: 550px) {
+        padding: 12px;
+    }
+}
+
+// Product title readability
+.card-title {
+    @media (max-width: 550px) {
+        font-size: 0.95rem;
+        line-height: 1.3;
+        margin-bottom: 8px;
+    }
+}
+
+// Mobile Image Handling
+// -----------------------------------------------------------------------------
+
+// Prevent layout shift with proper aspect ratios
+.card-img-container {
+    @media (max-width: 550px) {
+        // Ensure consistent aspect ratio
+        position: relative;
+        overflow: hidden;
+    }
+}
+
+// Carousel touch improvements
+.heroCarousel {
+    @media (max-width: 800px) {
+        // Enable smooth touch swiping
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y pinch-zoom;
+    }
+}
+
+// Product slider mobile improvements
+.productSlider {
+    @media (max-width: 800px) {
+        // Better touch scrolling
+        -webkit-overflow-scrolling: touch;
+
+        // Hide arrows on small screens (already implemented but ensuring)
+        .slick-arrow {
+            display: none;
+        }
+    }
+}
+
+// Mobile Form Elements
+// -----------------------------------------------------------------------------
+
+// Ensure form inputs are accessible on mobile
+input,
+select,
+textarea,
+button {
+    @media (max-width: 800px) {
+        min-height: 44px;
+        font-size: 16px; // Prevents iOS zoom on focus
+    }
+}
+
+// Search input mobile optimization
+.form-input {
+    @media (max-width: 550px) {
+        font-size: 16px;
+        padding: 12px;
+    }
+}
+
+// Mobile Cart & Checkout
+// -----------------------------------------------------------------------------
+
+.navUser-action {
+    @media (max-width: 800px) {
+        min-width: 44px;
+        min-height: 44px;
+        padding: 8px 12px;
+    }
+}
+
+// Mobile Footer
+// -----------------------------------------------------------------------------
+
+.footer {
+    @media (max-width: 800px) {
+        // Better spacing for footer sections
+        .footer-info-col {
+            margin-bottom: 24px;
+        }
+
+        // Larger tap targets for footer links
+        a {
+            padding: 8px 0;
+            display: inline-block;
+        }
+    }
+}
+
+// Mobile-Specific Layout Improvements
+// -----------------------------------------------------------------------------
+
+// Reduce excessive whitespace on mobile
+.container {
+    @media (max-width: 550px) {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+// Better mobile grid layouts
+.productGrid {
+    @media (max-width: 550px) {
+        // Single column on very small screens for better UX
+        .product {
+            width: 100%;
+        }
+    }
+}
+
+// Mobile Performance - Reduce Animations
+// -----------------------------------------------------------------------------
+
+@media (max-width: 800px) {
+    // Reduce motion for better mobile performance
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+}
+
+// Mobile Carousel Button Improvements
+// -----------------------------------------------------------------------------
+
+.carousel-play-pause-button {
+    @media (max-width: 800px) {
+        // Ensure adequate touch target
+        min-width: 48px;
+        min-height: 48px;
+        bottom: 16px;
+        right: 16px;
+    }
+}
+
+// Mobile Product Actions
+// -----------------------------------------------------------------------------
+
+.addtocart-btn {
+    @media (max-width: 550px) {
+        a, button {
+            min-height: 48px;
+            padding: 12px 20px;
+            font-size: 1rem;
+            width: 100%;
+            text-align: center;
+        }
+    }
+}
+
+// Improve button visibility on mobile
+.button {
+    @media (max-width: 800px) {
+        min-height: 44px;
+        padding: 12px 24px;
+
+        // Larger hit area for small buttons
+        &--small {
+            min-height: 40px;
+            padding: 10px 16px;
+        }
+    }
+}
+
+// Mobile Sticky Header
+// -----------------------------------------------------------------------------
+
+.headerSticky {
+    @media (max-width: 800px) {
+        position: sticky;
+        top: 0;
+        z-index: 999;
+
+        // Add shadow for better visual separation
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+}
+
+// Horizontal Scrolling Prevention
+// -----------------------------------------------------------------------------
+
+@media (max-width: 800px) {
+    body,
+    html {
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    // Prevent specific containers from causing horizontal scroll
+    .container,
+    .row,
+    section {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+}
+
+// Mobile Accessibility - Focus Indicators
+// -----------------------------------------------------------------------------
+
+@media (max-width: 800px) {
+    // Larger focus indicators for touch devices
+    *:focus-visible {
+        outline-width: 3px;
+        outline-offset: 3px;
+    }
+
+    // Enhanced focus for interactive elements
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible {
+        outline-width: 3px;
+        outline-offset: 2px;
+    }
+}
+
+// Mobile Text Selection
+// -----------------------------------------------------------------------------
+
+@media (max-width: 800px) {
+    // Better text selection on mobile
+    ::selection {
+        background-color: rgba(74, 144, 226, 0.3);
+        color: inherit;
+    }
+}
