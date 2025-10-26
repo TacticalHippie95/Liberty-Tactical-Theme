@@ -42,6 +42,107 @@ blog:
 
 {{/partial}}
 
+{{#partial "head"}}
+    {{!-- Homepage-specific SEO enhancements --}}
+
+    {{!-- Enhanced meta description for homepage --}}
+    {{#if settings.store_name}}
+    <meta name="description" content="Shop {{ settings.store_name }} for quality products. Browse our featured products, new arrivals, and best sellers. Free shipping available.">
+    {{/if}}
+
+    {{!-- Breadcrumb Schema for Homepage --}}
+    <script type="application/ld+json" nonce="{{nonce}}">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            {{#if settings.store_url}}
+            "item": "{{ settings.store_url }}"
+            {{/if}}
+        }]
+    }
+    </script>
+
+    {{!-- ItemList Schema for Featured Products --}}
+    {{#if products.featured}}
+    <script type="application/ld+json" nonce="{{nonce}}">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Featured Products",
+        "description": "Our hand-picked selection of featured products",
+        "numberOfItems": {{ products.featured.length }},
+        "itemListElement": [
+            {{#each products.featured}}
+            {
+                "@type": "Product",
+                "position": {{ add @index 1 }},
+                "name": "{{ name }}",
+                "url": "{{ url }}",
+                {{#if price.with_tax}}
+                "offers": {
+                    "@type": "Offer",
+                    "price": "{{ price.with_tax.value }}",
+                    "priceCurrency": "{{ currency_selector.active_currency_code }}",
+                    "availability": "{{#if availability}}https://schema.org/InStock{{else}}https://schema.org/OutOfStock{{/if}}",
+                    "url": "{{ url }}"
+                },
+                {{/if}}
+                {{#if image}}
+                "image": "{{ getImage image 'thumbnail' }}",
+                {{/if}}
+                "brand": {
+                    "@type": "Brand",
+                    "name": "{{#if brand.name}}{{ brand.name }}{{else}}{{ settings.store_name }}{{/if}}"
+                }
+            }{{#unless @last}},{{/unless}}
+            {{/each}}
+        ]
+    }
+    </script>
+    {{/if}}
+
+    {{!-- Store Structured Data --}}
+    <script type="application/ld+json" nonce="{{nonce}}">
+    {
+        "@context": "https://schema.org",
+        "@type": "Store",
+        "name": "{{ settings.store_name }}",
+        {{#if settings.store_url}}
+        "url": "{{ settings.store_url }}",
+        {{/if}}
+        "priceRange": "$",
+        {{#if settings.store_logo}}
+        "image": "{{ settings.store_logo.data }}",
+        {{/if}}
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Product Catalog",
+            "itemListElement": [
+                {
+                    "@type": "OfferCatalog",
+                    "name": "Featured Products",
+                    "numberOfItems": {{#if products.featured}}{{ products.featured.length }}{{else}}0{{/if}}
+                },
+                {
+                    "@type": "OfferCatalog",
+                    "name": "New Products",
+                    "numberOfItems": {{#if products.new}}{{ products.new.length }}{{else}}0{{/if}}
+                },
+                {
+                    "@type": "OfferCatalog",
+                    "name": "Best Sellers",
+                    "numberOfItems": {{#if products.top_sellers}}{{ products.top_sellers.length }}{{else}}0{{/if}}
+                }
+            ]
+        }
+    }
+    </script>
+{{/partial}}
+
 {{#partial "page"}}
 
     {{!-- Shipping notification messages --}}
@@ -53,8 +154,9 @@ blog:
     MAIN CONTENT CONTAINER
     Contains all homepage sections with customizable ordering
     Order is controlled by data-order attribute and theme_settings.gb-section-order
+    Semantic <article> for main homepage content
 --}}
-<div id="main-container" class="main full" data-sections="{{ theme_settings.gb-section-order }}">
+<article id="main-container" class="main full" data-sections="{{ theme_settings.gb-section-order }}" itemscope itemtype="https://schema.org/WebPageElement">
 
     {{!-- Section 1: Category Products --}}
     <section data-order="1">
@@ -122,7 +224,7 @@ blog:
         {{{region name="home_below_instagram"}}}
     </section>
 
-</div>
+</article>
 
 {{!--
     AGE VERIFICATION WIDGET
