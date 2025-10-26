@@ -25,10 +25,6 @@ blog:
 
     {{{region name="home_below_carousel"}}}
 
-    <!-- Elfsight Age Verification | Untitled Age Verification -->
-<script src="https://elfsightcdn.com/platform.js" async></script>
-<div class="elfsight-app-64455500-f072-4e0b-918a-1813d2ea5b63" data-elfsight-app-lazy></div>
-    
 {{/partial}}
 
 {{#partial "page"}}
@@ -96,5 +92,32 @@ blog:
             </section>
 
 </div>
+
+{{!-- Age Verification Widget - Loaded at bottom for better performance --}}
+<div class="elfsight-app-64455500-f072-4e0b-918a-1813d2ea5b63" data-elfsight-app-lazy></div>
+<script nonce="{{nonce}}">
+    (function() {
+        // Load Elfsight script after page load to avoid blocking critical resources
+        function loadElfsightScript() {
+            var script = document.createElement('script');
+            script.src = 'https://elfsightcdn.com/platform.js';
+            script.async = true;
+            script.defer = true;
+            // Error handling for failed script load
+            script.onerror = function() {
+                console.warn('Age verification widget failed to load');
+            };
+            document.body.appendChild(script);
+        }
+
+        // Load after page is fully loaded
+        if (document.readyState === 'complete') {
+            loadElfsightScript();
+        } else {
+            window.addEventListener('load', loadElfsightScript);
+        }
+    })();
+</script>
+
 {{/partial}}
 {{> layout/base}}
