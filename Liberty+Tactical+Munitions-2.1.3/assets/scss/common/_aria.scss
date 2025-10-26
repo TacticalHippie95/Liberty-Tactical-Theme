@@ -108,16 +108,5 @@ button,
     // Visible labels improve UX for all users, not just screen reader users
 }
 
-// Fallback support for browsers without :focus-visible
-// Provides same focus styles for older browsers
-@supports not selector(:focus-visible) {
-    *:focus {
-        outline: 3px solid #4A90E2;
-        outline-offset: 2px;
-    }
-
-    // Remove outline on mouse click (doesn't work in unsupported browsers)
-    *:focus:not(:focus-visible) {
-        outline: none;
-    }
-}
+// Note: :focus-visible has 90%+ browser support and is safe to use
+// Fallback for older browsers: they will simply show focus on all focus events
