@@ -1,5 +1,7 @@
 # Build artifacts
 *.zip
+# Exception: allow zip files in theme-package folder
+!theme-package/*.zip
 
 # Node modules
 node_modules/
