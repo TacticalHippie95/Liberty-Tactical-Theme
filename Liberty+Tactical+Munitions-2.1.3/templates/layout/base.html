@@ -7,6 +7,8 @@
         {{!-- Preconnect to external domains for faster resource loading --}}
         <link rel="preconnect" href="https://elfsightcdn.com" crossorigin>
         <link rel="dns-prefetch" href="https://elfsightcdn.com">
+        <link rel="preconnect" href="https://cdn.ywxi.net" crossorigin>
+        <link rel="dns-prefetch" href="https://cdn.ywxi.net">
 
         {{{ head.meta_tags }}}
         {{{ head.config }}}
@@ -75,5 +77,8 @@
         <script nonce="{{nonce}}" async defer src="{{cdn 'assets/dist/theme-bundle.main.js' resourceHint='preload' as='script'}}" onload="onThemeBundleMain()"></script>
 
         {{{footer.scripts}}}
+
+        {{!-- TrustedSite Certification --}}
+        <script nonce="{{nonce}}" type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
     </body>
 </html>
