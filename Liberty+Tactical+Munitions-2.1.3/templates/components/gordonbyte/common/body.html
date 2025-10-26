@@ -1,8 +1,19 @@
-<main class="body" id="main-content" role="main" data-currency-code="{{currency_selector.active_currency_code}}">
+{{!--
+    MAIN CONTENT CONTAINER
+    Semantic <main> landmark for primary page content
+    ARIA role="main" for older screen readers
+    Currency code for e-commerce functionality
+--}}
+<main class="body" id="main-content" role="main" data-currency-code="{{currency_selector.active_currency_code}}" itemscope itemtype="https://schema.org/WebPage">
+    {{!-- Hero section (above-the-fold content) --}}
     {{#block "hero"}} {{/block}}
+
+    {{!-- Main page content --}}
     <div class="container{{#if template '==' 'pages/home'}} container-delete{{/if}}">
         {{#block "page"}} {{/block}}
     </div>
+
+    {{!-- Modal overlays --}}
     {{> components/common/modal/modal}}
     {{> components/common/alert/alert-modal}}
 </main>

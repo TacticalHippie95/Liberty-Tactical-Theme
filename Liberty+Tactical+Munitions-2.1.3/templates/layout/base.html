@@ -1,14 +1,98 @@
 <!DOCTYPE html>
 <html class="no-js" lang="{{ locale_name }}">
     <head>
+        <meta charset="utf-8">
         <title>{{ head.title }}</title>
+
+        {{!-- SEO & Meta Tags --}}
         {{{ resourceHints }}}
+
+        {{!-- Canonical URL for SEO --}}
+        {{#if settings.store_url}}
+        <link rel="canonical" href="{{ settings.store_url }}{{ urls.home }}">
+        {{/if}}
+
+        {{!-- Preconnect to external domains for faster resource loading --}}
+        <link rel="preconnect" href="https://elfsightcdn.com" crossorigin>
+        <link rel="dns-prefetch" href="https://elfsightcdn.com">
+        <link rel="preconnect" href="https://cdn.ywxi.net" crossorigin>
+        <link rel="dns-prefetch" href="https://cdn.ywxi.net">
+
         {{{ head.meta_tags }}}
         {{{ head.config }}}
         {{#block "head"}} {{/block}}
 
         <link href="{{ head.favicon }}" rel="shortcut icon">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        {{!-- Theme color for mobile browsers --}}
+        <meta name="theme-color" content="#ffffff">
+
+        {{!-- Additional SEO meta tags --}}
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+        <meta name="googlebot" content="index, follow">
+
+        {{!-- Open Graph / Facebook Meta Tags --}}
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="{{ settings.store_name }}">
+        <meta property="og:title" content="{{ head.title }}">
+        {{#if head.meta_description}}
+        <meta property="og:description" content="{{ head.meta_description }}">
+        {{/if}}
+        {{#if settings.store_url}}
+        <meta property="og:url" content="{{ settings.store_url }}{{ urls.home }}">
+        {{/if}}
+        {{#if settings.store_logo}}
+        <meta property="og:image" content="{{ settings.store_logo.data }}">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta property="og:image:alt" content="{{ settings.store_name }} Logo">
+        {{/if}}
+        <meta property="og:locale" content="{{ locale_name }}">
+
+        {{!-- Twitter Card Meta Tags --}}
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{{ head.title }}">
+        {{#if head.meta_description}}
+        <meta name="twitter:description" content="{{ head.meta_description }}">
+        {{/if}}
+        {{#if settings.store_logo}}
+        <meta name="twitter:image" content="{{ settings.store_logo.data }}">
+        <meta name="twitter:image:alt" content="{{ settings.store_name }} Logo">
+        {{/if}}
+
+        {{!-- Structured Data - Organization Schema --}}
+        <script type="application/ld+json" nonce="{{nonce}}">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "{{ settings.store_name }}",
+            {{#if settings.store_url}}
+            "url": "{{ settings.store_url }}",
+            {{/if}}
+            {{#if settings.store_logo}}
+            "logo": "{{ settings.store_logo.data }}",
+            {{/if}}
+            "sameAs": []
+        }
+        </script>
+
+        {{!-- Structured Data - WebSite Schema --}}
+        <script type="application/ld+json" nonce="{{nonce}}">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "{{ settings.store_name }}",
+            {{#if settings.store_url}}
+            "url": "{{ settings.store_url }}",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "{{ settings.store_url }}/search?search_query={search_term_string}",
+                "query-input": "required name=search_term_string"
+            }
+            {{/if}}
+        }
+        </script>
 
         <script nonce="{{nonce}}">
             {{!-- Change document class from no-js to js so we can detect this in css --}}
@@ -20,9 +104,14 @@
 
         {{!-- Load Lazysizes script ASAP so images will appear --}}
         <script nonce="{{nonce}}">
-            {{!-- Only load visible elements until the onload event fires, after which preload nearby elements. --}}
+            {{!-- Enhanced lazy loading configuration for better performance --}}
             window.lazySizesConfig = window.lazySizesConfig || {};
-            window.lazySizesConfig.loadMode = 1;
+            window.lazySizesConfig.loadMode = 1; // Only load visible elements until onload, then preload nearby
+            window.lazySizesConfig.expand = 200; // Preload images 200px before they enter viewport
+            window.lazySizesConfig.expFactor = 1.5; // Expand value multiplier for fast scrolling
+            window.lazySizesConfig.loadHidden = false; // Don't load hidden images
+            window.lazySizesConfig.ricTimeout = 0; // Disable timeout for better performance
+            window.lazySizesConfig.throttleDelay = 125; // Throttle scroll events
         </script>
         <script nonce="{{nonce}}" async src="{{cdn 'assets/dist/theme-bundle.head_async.js' resourceHint='preload' as='script'}}"></script>
         
@@ -65,5 +154,8 @@
         <script nonce="{{nonce}}" async defer src="{{cdn 'assets/dist/theme-bundle.main.js' resourceHint='preload' as='script'}}" onload="onThemeBundleMain()"></script>
 
         {{{footer.scripts}}}
+
+        {{!-- TrustedSite Certification --}}
+        <script nonce="{{nonce}}" type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
     </body>
 </html>
