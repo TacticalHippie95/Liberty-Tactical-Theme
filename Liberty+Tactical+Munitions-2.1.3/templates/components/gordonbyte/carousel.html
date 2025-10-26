@@ -1,3 +1,16 @@
+{{!--
+    HERO CAROUSEL COMPONENT
+    Displays promotional slides in a rotating carousel with Slick slider
+
+    Features:
+    - Mobile-first responsive design
+    - Touch/swipe gestures on mobile
+    - Lazy loading for non-first slides
+    - Optional navigation arrows
+    - Optional play/pause controls
+    - ARIA accessibility support
+    - Customizable positioning and styling
+--}}
 <div class="heroCarousel-holder">
 <section class="heroCarousel clip-arrows {{#unless ../theme_settings.homepage_stretch_carousel_images}}gbstretch{{/unless}}"
     role="region"
@@ -19,13 +32,19 @@
     data-mobileimg='{{ theme_settings.gb-mobile-carousel-images }}'
 >
     {{#each carousel.slides}}
+    {{!--
+        Slide wrapper - uses <div> if there's a button, <a> otherwise
+        This allows clicking anywhere on the slide to navigate when no button is present
+    --}}
     {{#if button_text}}
     <div data-hero-slide="{{@index}}" role="group" aria-roledescription="slide" aria-label="{{lang 'carousel.slide_number' slide_number=(add @index 1)}}{{#if carousel.slides.length}} {{lang 'carousel.of'}} {{carousel.slides.length}}{{/if}}">
     {{else}}
     <a href="{{url}}" data-hero-slide="{{@index}}" role="group" aria-roledescription="slide" aria-label="{{#if this.alt_text.length '!=' 0}}{{this.alt_text}}{{else}}{{lang 'carousel.slide_number' slide_number=(add @index 1)}}{{/if}}{{#if carousel.slides.length}} {{lang 'carousel.of'}} {{carousel.slides.length}}{{/if}}">
     {{/if}}
     <div class="heroCarousel-slide {{#if ../theme_settings.homepage_stretch_carousel_images}}stretch{{/if}} {{#if @first}}heroCarousel-slide--first{{/if}}">
+        {{!-- Slide background image --}}
         <div class="heroCarousel-image-wrapper">
+        {{!-- First slide loads immediately, others lazy load for performance --}}
         {{#if @first}}
             {{> components/common/responsive-img
                 image=stencil_image
@@ -42,22 +61,31 @@
             }}
         {{/if}}
         </div>
-        
+
+        {{!-- Slide content overlay (heading, description, buttons) --}}
         <div class="heroCarousel-content heroCarouselPos-{{ ../theme_settings.gb-carousel-position }}{{#if ../theme_settings.gb-carousel-bg-transparent }} heroCarouselbg-transparent{{/if}}">
+            {{!-- Slide heading --}}
             {{#if heading}}
             <div>
                 <p class="heroCarousel-title">{{{heading}}}</p>
             </div>
             {{/if}}
+
+            {{!-- Slide description text --}}
             {{#if text}}
             <div>
                 <p class="heroCarousel-description">{{{text}}}</p>
             </div>
             {{/if}}
+
+            {{!-- Call-to-action button(s) --}}
             {{#if button_text}}
             <div>
                 <div class="button_holder">
+                    {{!-- Primary CTA button --}}
                     <a href="{{url}}" aria-label="{{#if this.alt_text.length '!=' 0}}{{this.alt_text}}{{else}}{{lang 'carousel.slide_number' slide_number=(add @index 1)}}{{/if}}, {{button_text}}" class="heroCarousel-action button button--primary button--large style-action first-herolink"><span>{{button_text}}</span></a>
+
+                    {{!-- Optional secondary CTA button --}}
                     {{#if ../theme_settings.gb-carousel-second-button-title }}
                     <a href="{{ ../theme_settings.gb-carousel-second-button-link }}" aria-label="{{#if this.alt_text.length '!=' 0}}{{this.alt_text}}{{else}}{{lang 'carousel.slide_number' slide_number=(add @index 1)}}{{/if}}, {{button_text}}" class="heroCarousel-action button button--primary button--large style-action second-herolink{{#if ../theme_settings.gb-carousel-second-button-inverse }} inverse-btn{{/if}}{{#if ../theme_settings.gb-carousel-second-button-transparent }} transparent-bg{{/if}}"><span>{{ ../theme_settings.gb-carousel-second-button-title }}</span></a>
                     {{/if}}
@@ -67,14 +95,20 @@
         </div>
 
     </div>
+    {{!-- Close slide wrapper --}}
     {{#if button_text}}
     </div>
     {{else}}
     </a>
     {{/if}}
     {{/each}}
+
+    {{!-- Carousel controls (only show if multiple slides) --}}
     {{#if carousel.slides.length '>' 1}}
+        {{!-- Screen reader announcements for slide changes --}}
         {{> components/carousel-content-announcement}}
+
+        {{!-- Optional play/pause button --}}
         {{#if play_pause_button}}
             {{> components/gordonbyte/carousel-play-pause-button}}
         {{/if}}

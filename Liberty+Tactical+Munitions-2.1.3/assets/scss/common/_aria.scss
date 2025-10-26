@@ -1,3 +1,21 @@
+// =============================================================================
+// ARIA & ACCESSIBILITY STYLES
+// =============================================================================
+//
+// Purpose: Provide accessibility helpers for screen readers and keyboard users
+// WCAG 2.1 Level AA compliant
+//
+// Contents:
+// 1. Screen reader only elements
+// 2. Skip navigation
+// 3. Focus styles
+// 4. Interactive element enhancements
+//
+// -----------------------------------------------------------------------------
+
+// 1. Screen Reader Only Elements
+// -----------------------------------------------------------------------------
+// Hides content visually while keeping it accessible to screen readers
 .aria-description {
     &--hidden {
         height: 1px;
@@ -10,7 +28,10 @@
     }
 }
 
-// Skip to main content link
+// 2. Skip Navigation Link
+// -----------------------------------------------------------------------------
+// Allows keyboard users to skip directly to main content
+// Hidden until focused, then appears at top center of page
 .skip-to-main-link {
     position: absolute;
     left: -9999px;
@@ -29,14 +50,19 @@
     }
 }
 
-// Enhanced focus styles for keyboard navigation
-// Using :focus-visible for better UX (only shows focus on keyboard navigation, not mouse clicks)
+// 3. Focus Styles for Keyboard Navigation
+// -----------------------------------------------------------------------------
+// Enhanced focus indicators for keyboard users
+// Using :focus-visible (modern approach) - only shows on keyboard, not mouse
+
+// Global focus style - 3px blue outline with 2px offset
 *:focus-visible {
     outline: 3px solid #4A90E2;
     outline-offset: 2px;
 }
 
-// Specific focus styles for interactive elements
+// Specific styles for common interactive elements
+// Ensures consistent focus appearance across the site
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -47,12 +73,12 @@ textarea:focus-visible,
     outline-offset: 2px;
 }
 
-// Focus styles for product cards
+// Product card focus - uses box-shadow for subtler effect
 .card:focus-within {
     box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3);
 }
 
-// Focus styles for carousel controls
+// Carousel controls - higher z-index ensures visibility over other elements
 .slick-arrow:focus-visible,
 .carousel-play-pause-button:focus-visible {
     outline: 3px solid #4A90E2;
@@ -60,34 +86,37 @@ textarea:focus-visible,
     z-index: 10;
 }
 
-// Focus styles for mobile menu toggle
+// Mobile menu toggle
 .mobileMenu-toggle:focus-visible {
     outline: 3px solid #4A90E2;
     outline-offset: 2px;
 }
 
-// Ensure buttons always have visible cursor
+// 4. Interactive Element Enhancements
+// -----------------------------------------------------------------------------
+
+// Ensure all buttons show pointer cursor for better UX
 button,
 [role="button"] {
     cursor: pointer;
 }
 
-// Improve contrast for visually hidden text that screen readers use
+// Screen reader labels for product actions
+// These labels should remain visible for better user experience
 .comparelabel-btn,
 .quickviewlabel-btn {
-    // These should remain visible for better UX
-    // Remove any display: none or visibility: hidden if present
+    // Visible labels improve UX for all users, not just screen reader users
 }
 
-// Fallback for browsers that don't support :focus-visible
-// Only show outline on actual keyboard focus, not mouse clicks
+// Fallback support for browsers without :focus-visible
+// Provides same focus styles for older browsers
 @supports not selector(:focus-visible) {
     *:focus {
         outline: 3px solid #4A90E2;
         outline-offset: 2px;
     }
 
-    // Remove outline on mouse click
+    // Remove outline on mouse click (doesn't work in unsupported browsers)
     *:focus:not(:focus-visible) {
         outline: none;
     }

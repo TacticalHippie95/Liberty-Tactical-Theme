@@ -15,98 +15,140 @@ blog:
         pages: 5
         summary: 200
 ---
+{{!--
+    HOMEPAGE TEMPLATE
+    This template defines the structure of the homepage with two main partials:
+    1. "hero" - Above the fold content (carousel, featured product slider)
+    2. "page" - Main content sections (products, info blocks, media)
+
+    Sections are ordered by the data-order attribute which can be customized
+    via theme settings (theme_settings.gb-section-order)
+--}}
+
 {{#partial "hero"}}
+    {{!-- Custom content region above carousel --}}
     {{{region name="home_below_menu"}}}
+
+    {{!-- Hero carousel with promotional slides --}}
     {{#and carousel carousel.slides.length}}
         {{> components/gordonbyte/carousel theme_settings=theme_settings arrows=theme_settings.homepage_show_carousel_arrows play_pause_button=theme_settings.homepage_show_carousel_play_pause_button}}
     {{/and}}
 
+    {{!-- Featured product slider - horizontal scrolling product showcase --}}
     {{> components/gordonbyte/common/featured-product-slider/featured-product-slider products=products theme_settings=theme_settings}}
 
+    {{!-- Custom content region below carousel --}}
     {{{region name="home_below_carousel"}}}
 
 {{/partial}}
 
 {{#partial "page"}}
 
+    {{!-- Shipping notification messages --}}
     {{#each shipping_messages}}
         {{> components/common/alert/alert-info message}}
     {{/each}}
 
+{{!--
+    MAIN CONTENT CONTAINER
+    Contains all homepage sections with customizable ordering
+    Order is controlled by data-order attribute and theme_settings.gb-section-order
+--}}
 <div id="main-container" class="main full" data-sections="{{ theme_settings.gb-section-order }}">
 
-            <section data-order="1">
-                    {{> components/gordonbyte/common/category-products/category-products theme_settings=theme_settings category=categories }}
-                    {{{region name="home_below_category_products"}}}
-            </section>
+    {{!-- Section 1: Category Products --}}
+    <section data-order="1">
+        {{> components/gordonbyte/common/category-products/category-products theme_settings=theme_settings category=categories }}
+        {{{region name="home_below_category_products"}}}
+    </section>
 
-            <section data-order="2">
-                    {{> components/gordonbyte/common/featured-product/featured-product theme_settings=theme_settings prod=products }}
-                    {{{region name="home_below_featured_product"}}}
-            </section>
+    {{!-- Section 2: Featured Product Showcase --}}
+    <section data-order="2">
+        {{> components/gordonbyte/common/featured-product/featured-product theme_settings=theme_settings prod=products }}
+        {{{region name="home_below_featured_product"}}}
+    </section>
 
-            <section data-order="3">
-                    {{#if products.featured}}
-                        {{> components/gordonbyte/products/featured products=products.featured columns=theme_settings.homepage_featured_products_column_count theme_settings=theme_settings settings=settings}}
-                    {{/if}}
-                    {{{region name="home_below_featured_products"}}}
-            </section>
+    {{!-- Section 3: Featured Products Grid --}}
+    <section data-order="3">
+        {{#if products.featured}}
+            {{> components/gordonbyte/products/featured products=products.featured columns=theme_settings.homepage_featured_products_column_count theme_settings=theme_settings settings=settings}}
+        {{/if}}
+        {{{region name="home_below_featured_products"}}}
+    </section>
 
-            <section data-order="7">
-                    {{#if products.top_sellers}}
-                        {{> components/gordonbyte/products/top products=products.top_sellers columns=theme_settings.homepage_top_products_column_count theme_settings=theme_settings settings=settings}}
-                    {{/if}}
-                    {{{region name="home_below_top_products"}}}
-            </section>
+    {{!-- Section 4: New Products Grid --}}
+    <section data-order="4">
+        {{#if products.new}}
+            {{> components/gordonbyte/products/new products=products.new columns=theme_settings.homepage_new_products_column_count theme_settings=theme_settings settings=settings}}
+        {{/if}}
+        {{{region name="home_below_new_products"}}}
+    </section>
 
-            <section data-order="5">
-                    {{> components/gordonbyte/common/featured-info/featured-info theme_settings=theme_settings }}
-                    {{{region name="home_below_featured_info"}}}
-            </section>   
-            
-            <section data-order="6">
-                    {{> components/gordonbyte/common/multi-column/multi-column theme_settings=theme_settings}}
-                    {{{region name="home_below_multi_column"}}}
-            </section>
+    {{!-- Section 5: Featured Info Blocks --}}
+    <section data-order="5">
+        {{> components/gordonbyte/common/featured-info/featured-info theme_settings=theme_settings }}
+        {{{region name="home_below_featured_info"}}}
+    </section>
 
-            <section data-order="4">
-                    {{#if products.new}}
-                        {{> components/gordonbyte/products/new products=products.new columns=theme_settings.homepage_new_products_column_count theme_settings=theme_settings settings=settings}}
-                    {{/if}}
-                    {{{region name="home_below_new_products"}}}
-            </section>
+    {{!-- Section 6: Multi-Column Content --}}
+    <section data-order="6">
+        {{> components/gordonbyte/common/multi-column/multi-column theme_settings=theme_settings}}
+        {{{region name="home_below_multi_column"}}}
+    </section>
 
-            <section data-order="8">
-                    {{> components/gordonbyte/common/video/video theme_settings=theme_settings}}
-                    {{{region name="home_below_video"}}}
-            </section>
+    {{!-- Section 7: Top Sellers / Best Selling Products --}}
+    <section data-order="7">
+        {{#if products.top_sellers}}
+            {{> components/gordonbyte/products/top products=products.top_sellers columns=theme_settings.homepage_top_products_column_count theme_settings=theme_settings settings=settings}}
+        {{/if}}
+        {{{region name="home_below_top_products"}}}
+    </section>
 
-            <section data-order="9">
-                    {{> components/gordonbyte/common/brands/brands theme_settings=theme_settings}}
-                    {{{region name="home_below_brands"}}}
-            </section>
+    {{!-- Section 8: Video Content --}}
+    <section data-order="8">
+        {{> components/gordonbyte/common/video/video theme_settings=theme_settings}}
+        {{{region name="home_below_video"}}}
+    </section>
 
-            <section data-order="11">
-                    {{> components/gordonbyte/common/instagram/instagram theme_settings=theme_settings}}
-                    {{{region name="home_below_instagram"}}}
-            </section>
+    {{!-- Section 9: Brand Showcase --}}
+    <section data-order="9">
+        {{> components/gordonbyte/common/brands/brands theme_settings=theme_settings}}
+        {{{region name="home_below_brands"}}}
+    </section>
+
+    {{!-- Section 10: Instagram Feed --}}
+    <section data-order="10">
+        {{> components/gordonbyte/common/instagram/instagram theme_settings=theme_settings}}
+        {{{region name="home_below_instagram"}}}
+    </section>
 
 </div>
 
-{{!-- Age Verification Widget - Loaded at bottom for better performance --}}
+{{!--
+    AGE VERIFICATION WIDGET
+    Loaded asynchronously at bottom for better page performance
+    Script deferred to avoid blocking critical resources
+--}}
 <div class="elfsight-app-64455500-f072-4e0b-918a-1813d2ea5b63" data-elfsight-app-lazy></div>
 <script nonce="{{nonce}}">
     (function() {
-        // Load Elfsight script after page load to avoid blocking critical resources
+        'use strict';
+
+        /**
+         * Load age verification widget script
+         * Deferred loading to prevent blocking page render
+         */
         function loadElfsightScript() {
             var script = document.createElement('script');
             script.src = 'https://elfsightcdn.com/platform.js';
             script.async = true;
             script.defer = true;
+
             // Error handling for failed script load
             script.onerror = function() {
                 console.warn('Age verification widget failed to load');
             };
+
             document.body.appendChild(script);
         }
 
