@@ -9,3 +9,86 @@
         width: 1px;
     }
 }
+
+// Skip to main content link
+.skip-to-main-link {
+    position: absolute;
+    left: -9999px;
+    z-index: 999;
+    padding: 1em;
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+
+    &:focus {
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        outline: 3px solid #4A90E2;
+        outline-offset: 2px;
+    }
+}
+
+// Enhanced focus styles for keyboard navigation
+// Using :focus-visible for better UX (only shows focus on keyboard navigation, not mouse clicks)
+*:focus-visible {
+    outline: 3px solid #4A90E2;
+    outline-offset: 2px;
+}
+
+// Specific focus styles for interactive elements
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible {
+    outline: 3px solid #4A90E2;
+    outline-offset: 2px;
+}
+
+// Focus styles for product cards
+.card:focus-within {
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3);
+}
+
+// Focus styles for carousel controls
+.slick-arrow:focus-visible,
+.carousel-play-pause-button:focus-visible {
+    outline: 3px solid #4A90E2;
+    outline-offset: 2px;
+    z-index: 10;
+}
+
+// Focus styles for mobile menu toggle
+.mobileMenu-toggle:focus-visible {
+    outline: 3px solid #4A90E2;
+    outline-offset: 2px;
+}
+
+// Ensure buttons always have visible cursor
+button,
+[role="button"] {
+    cursor: pointer;
+}
+
+// Improve contrast for visually hidden text that screen readers use
+.comparelabel-btn,
+.quickviewlabel-btn {
+    // These should remain visible for better UX
+    // Remove any display: none or visibility: hidden if present
+}
+
+// Fallback for browsers that don't support :focus-visible
+// Only show outline on actual keyboard focus, not mouse clicks
+@supports not selector(:focus-visible) {
+    *:focus {
+        outline: 3px solid #4A90E2;
+        outline-offset: 2px;
+    }
+
+    // Remove outline on mouse click
+    *:focus:not(:focus-visible) {
+        outline: none;
+    }
+}

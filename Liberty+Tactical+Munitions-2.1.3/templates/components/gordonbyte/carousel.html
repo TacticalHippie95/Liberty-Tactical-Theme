@@ -1,5 +1,8 @@
 <div class="heroCarousel-holder">
 <section class="heroCarousel clip-arrows {{#unless ../theme_settings.homepage_stretch_carousel_images}}gbstretch{{/unless}}"
+    role="region"
+    aria-label="{{lang 'carousel.featured_products'}}"
+    aria-roledescription="carousel"
     data-slick='{
         "arrows": {{arrows}},
         "mobileFirst": true,
@@ -13,9 +16,9 @@
 >
     {{#each carousel.slides}}
     {{#if button_text}}
-    <div data-hero-slide="{{@index}}">
+    <div data-hero-slide="{{@index}}" role="group" aria-roledescription="slide" aria-label="{{lang 'carousel.slide_number' slide_number=(add @index 1)}}{{#if carousel.slides.length}} {{lang 'carousel.of'}} {{carousel.slides.length}}{{/if}}">
     {{else}}
-    <a href="{{url}}" data-hero-slide="{{@index}}" aria-label="{{#if this.alt_text.length '!=' 0}}{{this.alt_text}}{{else}}{{lang 'carousel.slide_number' slide_number=(add @index 1)}}{{/if}}">
+    <a href="{{url}}" data-hero-slide="{{@index}}" role="group" aria-roledescription="slide" aria-label="{{#if this.alt_text.length '!=' 0}}{{this.alt_text}}{{else}}{{lang 'carousel.slide_number' slide_number=(add @index 1)}}{{/if}}{{#if carousel.slides.length}} {{lang 'carousel.of'}} {{carousel.slides.length}}{{/if}}">
     {{/if}}
     <div class="heroCarousel-slide {{#if ../theme_settings.homepage_stretch_carousel_images}}stretch{{/if}} {{#if @first}}heroCarousel-slide--first{{/if}}">
         <div class="heroCarousel-image-wrapper">
